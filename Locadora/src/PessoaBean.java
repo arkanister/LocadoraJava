@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author F1_SYSTEM1
  */
-public class Pessoa {
+public class PessoaBean {
     private int id;
     private String etiqueta;
     private String nome;

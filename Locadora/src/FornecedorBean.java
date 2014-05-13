@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author F1_SYSTEM1
  */
-public class Fornecedor extends Pessoa{
+public class FornecedorBean extends PessoaBean{
     private int id;
     private String cnpj;
     private String ie;

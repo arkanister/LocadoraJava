@@ -7,7 +7,7 @@
  *
  * @author F1_SYSTEM1
  */
-public class Endereco extends Pessoa{
+public class EnderecoBean extends PessoaBean{
     private int id;
     private String logradouro;
     private int numero;

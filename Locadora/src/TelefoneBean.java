@@ -7,7 +7,7 @@
  *
  * @author F1_SYSTEM1
  */
-public class Telefone extends Pessoa{
+public class TelefoneBean extends PessoaBean{
     private char prefixo;
     private String numero;
     private String tipo;

@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author F1_SYSTEM1
  */
-public class Midia extends Fornecedor{
+public class MidiaBean extends FornecedorBean{
     private String grupo;
     private String genero;
     private String censura;
