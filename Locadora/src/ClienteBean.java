@@ -1,5 +1,6 @@
 
 import java.util.Date;
+import java.util.List;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 /*
@@ -75,4 +76,5 @@ public class ClienteBean extends PessoaBean{
     protected void setNome(String nome) {
         this.nome = nome;
     }
+
 }
