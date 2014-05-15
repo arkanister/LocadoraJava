@@ -1,5 +1,11 @@
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /*
  * To change this template, choose Tools | Templates
@@ -11,13 +17,18 @@ import java.util.Date;
  * @author F1_SYSTEM1
  */
 public class PessoaBean {
-    private int id;
+    
+    ArrayList lista = new ArrayList();
+    
+    private int id = 0;
     private String etiqueta;
     private String nome;
     private String email;
     private Date data_cadastro;
     private int situacao;
 
+    
+    
     /**
      * @return the id
      */
@@ -68,4 +79,7 @@ public class PessoaBean {
     protected void setSituacao(int situacao) {
         this.situacao = situacao;
     }
-}
+    
+    public PessoaBean(){}
+   
+ }
