@@ -8,18 +8,8 @@
  * @author F1_SYSTEM1
  */
 public class TelefoneBean extends PessoaBean{
-    private char prefixo;
     private String numero;
     private String tipo;
-
-
-    protected char getPrefixo() {
-        return prefixo;
-    }
-
-    protected void setPrefixo(char prefixo) {
-        this.prefixo = prefixo;
-    }
 
     protected String getNumero() {
         return numero;

@@ -13,7 +13,7 @@ public class EnderecoBean extends PessoaBean{
     private int numero;
     private String bairro;
     private String municipio;
-    private char uf;
+    private String uf;
     private String pais;
     private String cep;
     private String complemento;
@@ -58,11 +58,11 @@ public class EnderecoBean extends PessoaBean{
         this.municipio = municipio;
     }
 
-    protected char getUf() {
+    protected String getUf() {
         return uf;
     }
 
-    protected void setUf(char uf) {
+    protected void setUf(String uf) {
         this.uf = uf;
     }
 

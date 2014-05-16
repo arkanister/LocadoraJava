@@ -7,9 +7,13 @@ public class Main {
         
         SaveFile svCliente = new SaveFile();
         SaveFile svPessoa = new SaveFile();
+        SaveFile svTelefone = new SaveFile();
+        SaveFile svEndereco = new SaveFile();
         
         svCliente.SaveCliente(svCliente.classCliente, svPessoa.classCliente);
-        }
-    
+        svCliente.classTelefone(svTelefone.classTelefone);
+        svCliente.classEndereco(svEndereco.classEndereco);
     }
+   
+}
 

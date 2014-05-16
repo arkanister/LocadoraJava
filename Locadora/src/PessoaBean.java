@@ -7,9 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class PessoaBean {
-    
-    ArrayList lista = new ArrayList();
+abstract class PessoaBean {
     
     private String id;
     private String email;
