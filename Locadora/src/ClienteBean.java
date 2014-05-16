@@ -3,29 +3,21 @@ import java.util.Date;
 import java.util.List;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author F1_SYSTEM1
- */
 public class ClienteBean extends PessoaBean{
-    private int id;
+    private String id;
     private String cpf;
     private String rg;
     private Date data_aniversario;
     private int sexo;
     private String foto;
     private String nome;
+    private Date data_cadastro;
 
-    protected int getId() {
+        public String getId() {
         return id;
     }
 
-    protected void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -77,4 +69,17 @@ public class ClienteBean extends PessoaBean{
         this.nome = nome;
     }
 
+    /**
+     * @return the data_cadastro
+     */
+    public Date getData_cadastro() {
+        return data_cadastro;
+    }
+
+    /**
+     * @param data_cadastro the data_cadastro to set
+     */
+    public void setData_cadastro(Date data_cadastro) {
+        this.data_cadastro = data_cadastro;
+    }
 }

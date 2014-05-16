@@ -8,7 +8,7 @@
  * @author F1_SYSTEM1
  */
 public class EnderecoBean extends PessoaBean{
-    private int id;
+    private String id;
     private String logradouro;
     private int numero;
     private String bairro;
@@ -18,11 +18,11 @@ public class EnderecoBean extends PessoaBean{
     private String cep;
     private String complemento;
 
-    protected int getId() {
+    protected String getId() {
         return id;
     }
     
-    protected void setId(int id) {
+    protected void setId(String id) {
         this.id = id;
     }
 

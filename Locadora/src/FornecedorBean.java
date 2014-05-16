@@ -11,16 +11,16 @@ import java.util.Date;
  * @author F1_SYSTEM1
  */
 public class FornecedorBean extends PessoaBean{
-    private int id;
+    private String id;
     private String cnpj;
     private String ie;
     private String razao_social;
 
-    protected int getId() {
+    protected String getId() {
         return id;
     }
 
-    protected void setId(int id) {
+    protected void setId(String id) {
         this.id = id;
     }
 
