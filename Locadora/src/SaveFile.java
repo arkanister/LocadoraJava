@@ -5,19 +5,53 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
+import javax.swing.filechooser.FileFilter;
 
 public class SaveFile {
     String barra = File.separator;
     
-    PessoaBean classCliente = new ClienteBean();
-    TelefoneBean classTelefone = new TelefoneBean();
-    EnderecoBean classEndereco = new EnderecoBean();
+    ClienteBean classCliente = new ClienteBean();
     
-    public boolean SaveCliente(ClienteBean cliente, PessoaBean pessoa, EnderecoBean endereco, TelefoneBean telefone){
+    
+    public boolean SaveFornecedor(FornecedorBean fornecedor){
+        boolean ret = false;
+        
+        File file = new File("c:"+ barra + "Locadora" + barra + "Fornecedores.txt");
+                                                        
+    try{
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        else {
+            
+            FileWriter fw = new FileWriter(file, true);
+            fw.write(fornecedor.getId()+";");
+            fw.write(fornecedor.getCnpj()+";");
+            fw.write(fornecedor.getIe()+";");
+            fw.write(fornecedor.getRazao_social()+"\n");
+            fw.flush();
+            fw.close();
+  
+            ret = true;
+        }
+        
+     
+    }
+        catch(IOException ex){
+            ret = false;
+            System.out.println("Erro ao registrar");
+        }
+        return ret;   
+    }
+    
+    
+    public boolean SaveCliente(ClienteBean cliente){
         boolean ret = false;
         
         File file = new File("c:"+ barra + "Locadora" + barra + "Cliente.txt");
+        ArrayList<ClienteBean> _cliente = new ArrayList<ClienteBean>();
         
         try{
             if(!file.exists()){
@@ -28,33 +62,36 @@ public class SaveFile {
             
             //Class Cliente
             fw.write(cliente.getId()+";");
+            
             fw.write(cliente.getNome()+";");
             fw.write(cliente.getRg()+";");
             fw.write(cliente.getCpf()+";");
             fw.write(cliente.getSexo()+";");
-            fw.write(cliente.getData_aniversario()+";");
+            //fw.write(cliente.getData_aniversario()+";");
            
             //Class Endereco
-            fw.write(endereco.getCep() + ";");
-            fw.write(endereco.getLogradouro() + ";");
-            fw.write(endereco.getNumero() + ";");
-            fw.write(endereco.getBairro() + ";");
-            fw.write(endereco.getMunicipio() + ";");
-            fw.write(endereco.getUf() + ";");
-            fw.write(endereco.getPais() + ";");
-            fw.write(endereco.getComplemento() + ";");
+            fw.write(cliente.getCep() + ";");
+            fw.write(cliente.getLogradouro() + ";");
+            fw.write(cliente.getNumero_logradouro() + ";");
+            fw.write(cliente.getBairro() + ";");
+            fw.write(cliente.getMunicipio() + ";");
+            fw.write(cliente.getUf() + ";");
+            fw.write(cliente.getPais() + ";");
+            fw.write(cliente.getComplemento() + ";");
              
             //Class Telefone
-            fw.write(telefone.getNumero() + ";");
-            fw.write(telefone.getTipo() + ";");
+            fw.write(cliente.getNumero_telefone() + ";");
+            //fw.write(cliente.getNumero_celular() + ";");
+            fw.write(cliente.getTipo() + ";");
             
             //Class Pessoa
-            fw.write(pessoa.getEmail()+";");
-            fw.write(pessoa.getSituacao()+";");
+            fw.write(cliente.getEmail()+";");
+            fw.write(cliente.getSituacao()+";");
            
             //Class Cliente
-            fw.write(cliente.getData_cadastro()+";");
-
+            //fw.write(cliente.getData_cadastro()+";");
+            
+            System.out.println(cliente);
             fw.flush();
             fw.close();
             ret = true;

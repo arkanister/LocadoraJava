@@ -4,20 +4,20 @@ import java.util.List;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 public class ClienteBean extends PessoaBean{
-    private String id;
-    private String cpf;
-    private String rg;
-    private Date data_aniversario;
-    private int sexo;
-    private String foto;
-    private String nome;
-    private Date data_cadastro;
+    protected int id;
+    protected String cpf;
+    protected String rg;
+    protected Date data_aniversario;
+    protected int sexo;
+    protected String foto;
+    protected String nome;
+    protected Date data_cadastro;
 
-        public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,16 +69,10 @@ public class ClienteBean extends PessoaBean{
         this.nome = nome;
     }
 
-    /**
-     * @return the data_cadastro
-     */
     public Date getData_cadastro() {
         return data_cadastro;
     }
 
-    /**
-     * @param data_cadastro the data_cadastro to set
-     */
     public void setData_cadastro(Date data_cadastro) {
         this.data_cadastro = data_cadastro;
     }

@@ -1,7 +1,8 @@
 
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
+import java.util.Arrays;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -332,8 +333,8 @@ public class frmClienteBean extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -344,42 +345,73 @@ public class frmClienteBean extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        ClienteBean cliente = new ClienteBean();
-        ClienteBean pessoa = new ClienteBean();
-        EnderecoBean endereco = new EnderecoBean();
-        TelefoneBean telefone = new TelefoneBean();
-        
-        SaveFile save = new SaveFile();
-        LerArquivo ler = new LerArquivo();
-        boolean isErro = false;
-        String msg = "";
-        
-        cliente.setId(txtId.getText());
-        cliente.setNome(txtNome.getText());
-        cliente.setCpf(txtCpf.getText());
-        cliente.setRg(txtRg.getText());
-        cliente.setData_aniversario(Date.valueOf(dTxtAniversario.getText()));
-        cliente.setEmail(txtEmail.getText());
-        
-        endereco.setCep(txtCep.getText());
-        endereco.setLogradouro(txtLogradouro.getText());
-        endereco.setNumero(Integer.parseInt(txtNumeroLogradouro.getText()));
-        endereco.setBairro(txtBairro.getText());
-        endereco.setMunicipio(cbxMunicipio.getSelectedItem().toString());
-        endereco.setUf(cbxUf.getSelectedItem().toString());
-        endereco.setPais(cbxPais.getSelectedItem().toString());
-        
-        telefone.setNumero(txtNumeroTelefone.getText());
-        telefone.setTipo(cbxTipoTelefone.getSelectedItem().toString());
-        
-        if(!isErro){
-            if(save.SaveCliente(cliente, pessoa, endereco, telefone)){
-                JOptionPane.showMessageDialog(null, "Salvo");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Invalido");
-            }
-        }
+//        ClienteBean cliente = new ClienteBean();
+//        ArrayList<String> _cliente = new ArrayList();
+//        SaveFile save = new SaveFile();
+//        LerArquivo ler = new LerArquivo();
+//             
+//        boolean isErro = false;
+//        String msg = "";
+//       
+//        for(int i=1; i < _cliente.size(); i++){
+//        
+//            //Cliente
+//            cliente.setId(Integer.valueOf(txtId.getText()));
+//            cliente.setNome(txtNome.getText());
+//            cliente.setCpf(txtCpf.getText());
+//            cliente.setRg(txtRg.getText());
+//    //        cliente.setData_aniversario(Date.valueOf(dTxtAniversario.getText()));
+//            cliente.setEmail(txtEmail.getText());
+//
+//            //Endereco
+//            cliente.setCep(txtCep.getText());
+//            cliente.setLogradouro(txtLogradouro.getText());
+//            cliente.setNumero(txtNumeroLogradouro.getText().toString());
+//            cliente.setBairro(txtBairro.getText());
+//            cliente.setMunicipio(cbxMunicipio.getSelectedItem().toString());
+//            cliente.setUf(cbxUf.getSelectedItem().toString());
+//            cliente.setPais(cbxPais.getSelectedItem().toString());
+//            
+//            //telefone
+//            cliente.setNumero(txtNumeroTelefone.getText());
+//            cliente.setTipo(cbxTipoTelefone.getSelectedItem().toString());
+//            
+//            if(!isErro){
+//                if(save.SaveCliente(cliente)){
+//                    JOptionPane.showMessageDialog(null, "Salvo");
+//                }
+//                else {
+//                    JOptionPane.showMessageDialog(null, "Invalido");
+//                }
+//            }
+//            
+//            //Leitura em um array -- Class Cliente
+//            _cliente.add(String.valueOf(cliente.getId()));
+//            _cliente.add(cliente.getNome());
+//            _cliente.add(cliente.getCep());
+//            _cliente.add(cliente.getRg());
+//            
+//            //Class Cliente (Contato).
+//            _cliente.add(cliente.getNumero_telefone());
+//            _cliente.add(cliente.getTipo());
+//            _cliente.add(cliente.getEmail());
+//            
+//            
+//            //Class Endereco ()
+//            _cliente.add(cliente.getCep());
+//            _cliente.add(cliente.getLogradouro());
+//            _cliente.add(String.valueOf(cliente.getNumero_logradouro()));
+//            _cliente.add(cliente.getBairro());
+//            _cliente.add(cliente.getUf());
+//            _cliente.add(cliente.getPais());
+//            _cliente.add(cliente.getComplemento());
+//            
+//            
+//            
+//            for(String name : _cliente){
+//                System.out.println(name);
+//            }
+//        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**

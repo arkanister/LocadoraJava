@@ -11,40 +11,57 @@ import java.util.Date;
  * @author F1_SYSTEM1
  */
 public class FornecedorBean extends PessoaBean{
-    private String id;
-    private String cnpj;
-    private String ie;
-    private String razao_social;
+    protected int id;
+    protected String cnpj;
+    protected String ie;
+    protected String razao_social;
 
-    protected String getId() {
+    public int getId() {
         return id;
     }
 
-    protected void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    protected String getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    protected void setCnpj(String cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
-    protected String getIe() {
+    public String getIe() {
         return ie;
     }
 
-    protected void setIe(String ie) {
+    public void setIe(String ie) {
         this.ie = ie;
     }
 
-    protected String getRazao_social() {
+    public String getRazao_social() {
         return razao_social;
     }
 
-    protected void setRazao_social(String razao_social) {
+    public void setRazao_social(String razao_social) {
         this.razao_social = razao_social;
     }
+
+    public FornecedorBean() {
+    }
+
+    public FornecedorBean(int id, String cnpj, String ie, String razao_social) {
+        this.id = id;
+        this.cnpj = cnpj;
+        this.ie = ie;
+        this.razao_social = razao_social;
+    }
+
+    @Override
+    public String toString() {
+        return id + razao_social + cnpj + ie;
+    }
+    
+    
 }
