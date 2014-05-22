@@ -8,8 +8,7 @@ public class Main {
 //        SaveFile svCliente = new SaveFile();
 //        svCliente.SaveCliente(svCliente.classCliente);
 
-        LerArquivo execute = new LerArquivo();
-        execute.ReadFile(null);
+
         
     }
    

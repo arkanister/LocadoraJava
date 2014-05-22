@@ -1,24 +1,19 @@
-
+import com.sun.org.apache.xerces.internal.impl.dtd.models.DFAContentModel;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author F1_SYSTEM1
- */
 public class frmFornecedorBean extends javax.swing.JFrame {
+    ArrayList<FornecedorBean> carregando_lista;
+    int current = 0;
     
-    Dados dados = new Dados();
-    
+    //Inicializando a lista de fornecedores.
     public frmFornecedorBean() {
         initComponents();
+        this.carregando_lista = Leitor.loaderFile();
+       
+        
     }
-
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,8 +24,9 @@ public class frmFornecedorBean extends javax.swing.JFrame {
         txtIe = new javax.swing.JTextField();
         txtRazaoSocial = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
-        btnRead = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,10 +37,10 @@ public class frmFornecedorBean extends javax.swing.JFrame {
             }
         });
 
-        btnRead.setText("Read");
-        btnRead.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReadActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -55,25 +51,33 @@ public class frmFornecedorBean extends javax.swing.JFrame {
             }
         });
 
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIe, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRead)
+                        .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalvar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIe, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnSalvar)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,8 +93,9 @@ public class frmFornecedorBean extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(btnRead)
-                    .addComponent(btnDelete))
+                    .addComponent(btnSearch)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -98,51 +103,79 @@ public class frmFornecedorBean extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+        FornecedorBean fornecedor = new FornecedorBean();
         
-        Integer id = Integer.valueOf(txtId.getText());
-        String cnpj = txtCnpj.getText();
-        String ie = txtIe.getText();
-        String razao_social = txtRazaoSocial.getText();
-        
-        FornecedorBean f = new FornecedorBean(id , cnpj, ie, razao_social);
-        
-        SaveFile save = new SaveFile();
-     
-        save.SaveFornecedor(f);
-        dados.Salvar(f);
+        fornecedor.setId(Integer.parseInt(txtId.getText()));
+        fornecedor.setCnpj(txtCnpj.getText());
+        fornecedor.setIe(txtIe.getText());
+        fornecedor.setRazao_social(txtRazaoSocial.getText());
+
+        carregando_lista.add(fornecedor);
+
+        Salvar.saveFile(carregando_lista);
+        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        LerArquivo read = new LerArquivo();
         String id = txtId.getText();
         String cnpj = txtCnpj.getText();
         String ie = txtIe.getText();
         String razao_social = txtRazaoSocial.getText();
         
-        FornecedorBean fornecedor = read.ReadFile(id);
-        System.out.println();
-        System.out.println();
-        if(Integer.valueOf(id) == fornecedor.getId())
-            System.out.println("Este código existe");
+        FornecedorBean fornecedor = Leitor.searchRegister(id);
+        
+        if (String.valueOf(fornecedor.getId()) != null) {
+            txtId.setText(String.valueOf(fornecedor.getId()));
             
-        if(Integer.valueOf(fornecedor.getId()) != null){
             txtCnpj.setText(fornecedor.getCnpj());
             txtIe.setText(fornecedor.getIe());
             txtRazaoSocial.setText(fornecedor.getRazao_social());
+            
         }
-        else {
-            JOptionPane.showMessageDialog(null, "Erro ao ler arquivo");
-            txtId.requestFocus();
-        }
-    }//GEN-LAST:event_btnReadActionPerformed
+        
+        else
+            JOptionPane.showMessageDialog(null, "O registro não pode ser encontrado");
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-
+        FornecedorBean fornecedor = new FornecedorBean();
+        boolean remover = Delete.removeRegistro(txtId.getText());
+        
+        Object msg = JOptionPane.showConfirmDialog(null, "TESTE", "MENSAGEM", JOptionPane.OK_OPTION);
+        if(msg == JOptionPane.OK_OPTION){
+            remover = true;
+            clear();
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Nem tem este bagaça");
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        
+        FornecedorBean fornecedor = new FornecedorBean();
+        
+
+        fornecedor = new FornecedorBean();
+        
+        fornecedor.setId(Integer.parseInt(txtId.getText()));
+        fornecedor.setCnpj(txtCnpj.getText());
+        fornecedor.setIe(txtIe.getText());
+        fornecedor.setRazao_social(txtRazaoSocial.getText());
+        for(int i=0; i < carregando_lista.size();i++) 
+            if(fornecedor.getId()==carregando_lista.get(i).getId()){
+            Editar.editRegister(fornecedor);
+            clear();
+            JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
+
+            } 
+            else {
+            JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
+                JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+   
     /**
      * @param args the command line arguments
      */
@@ -183,11 +216,25 @@ public class frmFornecedorBean extends javax.swing.JFrame {
                 new frmFornecedorBean().setVisible(true);
             }
         });
+        
+        
+        
+        
+        
     }
+    private void clear(){
+        txtId.setText(null);
+        txtCnpj.setText(null);
+        txtIe.setText(null);
+        txtRazaoSocial.setText(null);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnRead;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIe;
