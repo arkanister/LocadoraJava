@@ -1,9 +1,7 @@
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
-
 
 public class Leitor {
 //Declarando um metodo estatico de um array list do objeto do Fornecedor(Classe FornecedorBean)
@@ -23,8 +21,21 @@ public class Leitor {
                 fornecedor.setCnpj(st.nextToken());
                 fornecedor.setIe(st.nextToken());
                 fornecedor.setRazao_social(st.nextToken());
-
-                //Adicionando os valores na lista de fornecedores.
+            //Endereco
+                fornecedor.setCep(st.nextToken());
+                fornecedor.setLogradouro(st.nextToken());
+                fornecedor.setNumero_logradouro(Integer.parseInt(st.nextToken()));
+                fornecedor.setBairro(st.nextToken());
+                fornecedor.setMunicipio(st.nextToken());
+                fornecedor.setUf(st.nextToken());
+                fornecedor.setPais(st.nextToken());
+            //Contatos
+                fornecedor.setNumero_telefone(st.nextToken());
+                fornecedor.setNumero_celular(st.nextToken());
+                fornecedor.setEmail(st.nextToken());
+            //Situacao Ativo ou Inativo.
+                fornecedor.setSituacao(st.nextToken());
+            //Adicionando os valores na lista de fornecedores.
                 fornecedores.add(fornecedor);
             }
             reader.close();
@@ -50,6 +61,20 @@ public class Leitor {
                     fornecedor.setCnpj(st.nextToken());
                     fornecedor.setIe(st.nextToken());
                     fornecedor.setRazao_social(st.nextToken());
+                //Endereco
+                    fornecedor.setCep(st.nextToken());
+                    fornecedor.setLogradouro(st.nextToken());
+                    fornecedor.setNumero_logradouro(Integer.parseInt(st.nextToken()));
+                    fornecedor.setBairro(st.nextToken());
+                    fornecedor.setMunicipio(st.nextToken());
+                    fornecedor.setUf(st.nextToken());
+                    fornecedor.setPais(st.nextToken());
+                //Contatos
+                    fornecedor.setNumero_telefone(st.nextToken());
+                    fornecedor.setNumero_celular(st.nextToken());
+                    fornecedor.setEmail(st.nextToken());
+                //Situacao Ativo ou Inativo.
+                    fornecedor.setSituacao(st.nextToken());
                     break;
                 }
             }

@@ -1,15 +1,6 @@
 
-import java.util.Date;
+package Locadora01;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author F1_SYSTEM1
- */
 public class FornecedorBean extends PessoaBean{
     protected int id;
     protected String cnpj;
@@ -48,22 +39,7 @@ public class FornecedorBean extends PessoaBean{
     public void setRazao_social(String razao_social) {
         this.razao_social = razao_social;
     }
-
-    public FornecedorBean() {
-    }
-
-    public FornecedorBean(int id, String cnpj, String ie, String razao_social) {
-        this.id = id;
-        this.cnpj = cnpj;
-        this.ie = ie;
-        this.razao_social = razao_social;
-    }
-
-    @Override
-    public String toString() {
-        return id + razao_social + cnpj + ie;
-    }
-
+    
     public String getSituacao() {
         return situacao;
     }
@@ -72,5 +48,5 @@ public class FornecedorBean extends PessoaBean{
         this.situacao = situacao;
     }
     
-    
+    public FornecedorBean() { }
 }

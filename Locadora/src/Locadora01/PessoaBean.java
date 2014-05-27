@@ -1,11 +1,4 @@
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
+package Locadora01;
 
 abstract class PessoaBean {
     //Pessoa
@@ -24,8 +17,7 @@ abstract class PessoaBean {
     protected String numero_telefone;
     protected String numero_celular;
     protected String tipo;
-    
-    
+
     //Pessoa
     public int getId() {
         return id;

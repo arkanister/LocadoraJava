@@ -23,11 +23,25 @@ public class Salvar {
                 //Instanciado um novo fornecedor e recebendo a utima posição da lista de fornecedores.
                 
                 FornecedorBean fornecedor = fornecedores.get(i);
-                
+                //Daodos Básico.
                 fw.write(fornecedor.getId()+";");
                 fw.write(fornecedor.getCnpj()+";");
                 fw.write(fornecedor.getIe()+";");
-                fw.write(fornecedor.getRazao_social()+"\n");
+                fw.write(fornecedor.getRazao_social()+";");
+                //Endereço.
+                fw.write(fornecedor.getCep()+";");
+                fw.write(fornecedor.getLogradouro()+";");
+                fw.write(fornecedor.getNumero_logradouro()+";");
+                fw.write(fornecedor.getBairro()+";");
+                fw.write(fornecedor.getMunicipio()+";");
+                fw.write(fornecedor.getUf()+";");
+                fw.write(fornecedor.getPais()+";");
+                //Contato.
+                fw.write(fornecedor.getNumero_telefone()+";");
+                fw.write(fornecedor.getNumero_celular()+";");
+                fw.write(fornecedor.getEmail()+";");
+                //Situação Ativa ou Inativa.
+                fw.write(fornecedor.getSituacao()+"\n"); 
             }
         fw.flush();
         fw.close();
