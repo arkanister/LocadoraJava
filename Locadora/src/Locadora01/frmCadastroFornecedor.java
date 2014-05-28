@@ -442,7 +442,5 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
         jtxtTelefone.setText(null);
         jtxtCelular.setText(null);
         jtxtEmail.setText(null);
-        
-        
     }
 }

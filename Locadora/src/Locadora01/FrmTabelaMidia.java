@@ -1,28 +1,30 @@
 package Locadora01;
 
+import Locadora01.FornecedorBean;
+import Locadora01.Leitor;
+import Locadora01.MidiaBean;
+import Locadora01.frmCadastroMidia;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-public class FrmTabelaClientes extends javax.swing.JFrame {
-    ArrayList<ClienteBean> carregando_lista;
+public class FrmTabelaMidia extends javax.swing.JFrame {
+    ArrayList<MidiaBean> carregando_lista_midia;
     
-    Object titulo[] = {"ID", "Razão Social", "Cnpj", "Email"};
+    Object titulo[] = {"ID", "Fornecedor", "Titulo", "Genero"};
     Object grade[][] = null;
     DefaultTableModel modelo = new DefaultTableModel(grade, titulo);
-   
-    public FrmTabelaClientes() {
+    
+    public FrmTabelaMidia() {
         initComponents();
-        setLocationRelativeTo(null);
-        this.carregando_lista = Leitor.loaderFileCliente();
+        this.carregando_lista_midia = Leitor.loaderFileMidia();
         jtbListaFornecedores.setModel(modelo);
 
-        for(int i = 0; i < carregando_lista.size(); i++){
+        for(int i = 0; i < carregando_lista_midia.size(); i++){
         
-        
-        Object campos[] = {carregando_lista.get(i).getId(),
-                            carregando_lista.get(i).getNome(),
-                            carregando_lista.get(i).getCpf(),
-                            carregando_lista.get(i).getEmail()};
+        Object campos[] = {carregando_lista_midia.get(i).getId(),
+                            carregando_lista_midia.get(i).getFornecedor_id(),
+                            carregando_lista_midia.get(i).getTitulo(),
+                            carregando_lista_midia.get(i).getGenero()};
         
         modelo.addRow(campos);
         }
@@ -33,12 +35,12 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtbListaFornecedores = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jbtnRemover = new javax.swing.JButton();
         jbtnNovo = new javax.swing.JButton();
         jbtnSair = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbListaFornecedores = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jtxtId = new javax.swing.JTextField();
@@ -48,20 +50,7 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel2.setText("Clientes");
-
-        jtbListaFornecedores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Código", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jtbListaFornecedores);
+        jLabel2.setText("Midias");
 
         jbtnRemover.setBackground(new java.awt.Color(255, 102, 102));
         jbtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/delete/delete-32.png"))); // NOI18N
@@ -77,11 +66,6 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
 
         jbtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/exit/exit-32.png"))); // NOI18N
         jbtnSair.setText("Sair");
-        jbtnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSairActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,6 +90,19 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
                     .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jtbListaFornecedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtbListaFornecedores);
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setText("Código:");
@@ -151,7 +148,7 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -179,21 +176,19 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
-        frmCadastroCliente dialog = new frmCadastroCliente();
+        frmCadastroMidia dialog = new frmCadastroMidia();
         dialog.setVisible(true);
         dialog.setLocationRelativeTo(null);
     }//GEN-LAST:event_jbtnNovoActionPerformed
 
-    private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
-        dispose();
-    }//GEN-LAST:event_jbtnSairActionPerformed
-
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -203,22 +198,24 @@ public class FrmTabelaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmTabelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmTabelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmTabelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmTabelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        java.awt.EventQueue.invokeLater(new Runnable() {
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmTabelaClientes().setVisible(true);
+                new FrmTabelaMidia().setVisible(true);
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;

@@ -11,6 +11,7 @@ public class Salvar {
     public static final String LOCAL_FORNECEDOR = ("c:"+ BARRA + "Locadora" + BARRA + "Fornecedores.txt");
     public static final String LOCAL_CLIENTE = ("c:"+ BARRA + "Locadora" + BARRA + "Clientes.txt");
     public static final String LOCAL_MIDIA = ("c:"+ BARRA + "Locadora" + BARRA + "Midias.txt");
+    public static final String LOCAL_MOVIMENTO = ("c:"+ BARRA + "Locadora" + BARRA + "Movimentos.txt");
     
     //Metodo responsavel por gravar os dados que estão armazenados no array list no arquivo
     public static boolean  saveFileFornecedor(ArrayList<FornecedorBean> fornecedores){
@@ -97,7 +98,7 @@ public class Salvar {
         }
     }
 
- public static boolean  saveFileMidia(ArrayList<MidiaBean> midias){
+    public static boolean  saveFileMidia(ArrayList<MidiaBean> midias){
         File file = new File(LOCAL_MIDIA);
     
         try{
@@ -133,4 +134,37 @@ public class Salvar {
             return false;
         }
     }
+    
+    public static boolean  saveFileMovimento(ArrayList<MovimentoBean> movimentos){
+        File file = new File(LOCAL_MOVIMENTO);
+    
+        try{
+            //Se o arquivo não existir ele vai criar um novo.
+            if(!file.exists()) file.createNewFile();
+            //Instanciando um Gravador e indicando o arquivo que ele vai utilizar.
+            FileWriter fw = new FileWriter(file);
+            
+            for(int i=0; i < movimentos.size(); i++){
+                //Instanciado um novo fornecedor e recebendo a utima posição da lista de fornecedores.
+                
+                MovimentoBean movimento = movimentos.get(i);
+                //Daodos Básico.
+                fw.write(movimento.getId()+";");
+                fw.write(movimento.getCliente_id()+";");
+                fw.write(movimento.getMidia_id()+";");
+                fw.write(movimento.getData_locacao()+";");
+                fw.write(movimento.getData_devolucao()+";");
+                fw.write(movimento.getValor_total()+";");
+                fw.write(movimento.getValor_pago()+";");
+                fw.write(movimento.getValor_total()+"\n");
+            }
+        fw.flush();
+        fw.close();
+        return true;
+        
+        } catch(IOException ex){
+            return false;
+        }
+    }
+    
 }

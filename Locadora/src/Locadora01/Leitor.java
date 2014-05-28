@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.StringTokenizer;
 
 public class Leitor {
@@ -250,5 +249,71 @@ public class Leitor {
             System.out.println("Erro na leitura do arquivo");
        }
        return midia;
+    }
+    
+    public static ArrayList<MovimentoBean> loaderFileMovimento(){
+        ArrayList<MovimentoBean> movimentos = new ArrayList();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_MOVIMENTO));
+
+            while(reader.ready()){
+                String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
+                StringTokenizer st = new StringTokenizer(line, ";"); //Lendo a linha e verificando os valores.
+                
+                MovimentoBean movimento = new MovimentoBean();
+
+                movimento.setId(st.nextToken());
+                movimento.setCliente_id(st.nextToken());
+                movimento.setMidia_id(st.nextToken());
+                movimento.setData_locacao(st.nextToken());
+                movimento.setData_locacao(st.nextToken());
+                movimento.setValor_total(st.nextToken());
+                movimento.setValor_multa(st.nextToken());
+                movimento.setValor_pago(st.nextToken());
+                movimento.setValor_saldo(st.nextToken());
+
+                movimentos.add(movimento);
+            }
+            reader.close();
+
+        }catch(IOException ex){
+
+        }
+        return movimentos;
+    }
+    
+    public static MovimentoBean searchRegisterMovimento(String idTela) {
+        MovimentoBean movimento = new MovimentoBean();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_MOVIMENTO));
+
+            while(reader.ready()){
+                String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
+                StringTokenizer st = new StringTokenizer(line, ";"); //Lendo a linha e verificando os valores.
+                String id = st.nextToken();
+
+                if (id.trim().equals(idTela.trim())) {
+                    movimento.setId(st.nextToken());
+                    movimento.setCliente_id(st.nextToken());
+                    movimento.setMidia_id(st.nextToken());
+                    movimento.setData_locacao(st.nextToken());
+                    movimento.setData_locacao(st.nextToken());
+                    movimento.setValor_total(st.nextToken());
+                    movimento.setValor_multa(st.nextToken());
+                    movimento.setValor_pago(st.nextToken());
+                    movimento.setValor_saldo(st.nextToken());
+                    break;
+                }
+            }
+            reader.close();
+
+       } catch (FileNotFoundException ex) {
+            System.out.println("TESTE não encontrado");
+       } catch (IOException ex) {
+            System.out.println("Erro na leitura do arquivo");
+       }
+       return movimento;
     }
 }

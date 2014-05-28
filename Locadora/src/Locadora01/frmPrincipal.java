@@ -36,6 +36,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         smbCliente = new javax.swing.JMenuItem();
         smbMidia = new javax.swing.JMenuItem();
         Movimentacao = new javax.swing.JMenu();
+        mbEmprestimo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,10 +54,20 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         smbFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         smbFornecedor.setText("Fornecedor");
+        smbFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smbFornecedorActionPerformed(evt);
+            }
+        });
         mbCadastro.add(smbFornecedor);
 
         smbCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         smbCliente.setText("Cliente");
+        smbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smbClienteActionPerformed(evt);
+            }
+        });
         mbCadastro.add(smbCliente);
 
         smbMidia.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
@@ -66,6 +77,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         mbPrincipal.add(mbCadastro);
 
         Movimentacao.setText("Movimento");
+
+        mbEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mbEmprestimo.setText("Emprestimo");
+        mbEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbEmprestimoActionPerformed(evt);
+            }
+        });
+        Movimentacao.add(mbEmprestimo);
+
         mbPrincipal.add(Movimentacao);
 
         setJMenuBar(mbPrincipal);
@@ -83,6 +104,24 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void smbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smbFornecedorActionPerformed
+        frmTabelaFornecedores dialog = new frmTabelaFornecedores();
+        dialog.setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_smbFornecedorActionPerformed
+
+    private void smbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smbClienteActionPerformed
+        frmTabelaClientes dialog = new frmTabelaClientes();
+        dialog.setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_smbClienteActionPerformed
+
+    private void mbEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbEmprestimoActionPerformed
+        frmMovimentacao dialog = new frmMovimentacao();
+        dialog.setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_mbEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,6 +162,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu Movimentacao;
     private javax.swing.JMenu mbArquivo;
     private javax.swing.JMenu mbCadastro;
+    private javax.swing.JMenuItem mbEmprestimo;
     private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenuItem smbCliente;
     private javax.swing.JMenuItem smbFornecedor;
