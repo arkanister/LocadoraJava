@@ -27,6 +27,7 @@ public class frmCadastroMidia extends javax.swing.JFrame {
         jbtnRemover = new javax.swing.JButton();
         jbtnNovo = new javax.swing.JButton();
         jbtnSair = new javax.swing.JButton();
+        jbtnEditar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jtxtId = new javax.swing.JTextField();
@@ -62,7 +63,6 @@ public class frmCadastroMidia extends javax.swing.JFrame {
         jftxtDataLancamento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 700));
 
         jbtnRemover.setBackground(new java.awt.Color(255, 102, 102));
         jbtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/delete/delete-32.png"))); // NOI18N
@@ -85,6 +85,13 @@ public class frmCadastroMidia extends javax.swing.JFrame {
             }
         });
 
+        jbtnEditar.setText("Editar");
+        jbtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -94,7 +101,9 @@ public class frmCadastroMidia extends javax.swing.JFrame {
                 .addComponent(jbtnSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jbtnEditar)
+                .addGap(18, 18, 18)
                 .addComponent(jbtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -105,7 +114,8 @@ public class frmCadastroMidia extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -215,7 +225,7 @@ public class frmCadastroMidia extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jcbxCensura, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jcbxFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,7 +303,7 @@ public class frmCadastroMidia extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jtxtAutor, javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,18 +415,19 @@ public class frmCadastroMidia extends javax.swing.JFrame {
         //Faltando fornecedor
         midia.setId(jtxtId.getText());
         midia.setFornecedor_id(jcbxFornecedor.getSelectedItem().toString());
+        midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
         midia.setGenero(jcbxGenero.getSelectedItem().toString());
         midia.setCensura(jcbxCensura.getSelectedItem().toString());
-        midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
        
         midia.setTitulo(jtxtTitulo.getText());
         midia.setAutor(jtxtAutor.getText());
         midia.setDiretor(jtxtDiretor.getText());
         midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
         midia.setData_lancamento(jftxtDataLancamento.getText());
+        
+        midia.setSinopse(jtxtSinopse.getText());
         midia.setValor_custo(jtxtCusto.getText());
         midia.setValor_locacao(jtxtLocacao.getText());
-        midia.setSinopse(jtxtSinopse.getText());
         carregando_lista.add(midia);
 
         Salvar.saveFileMidia(carregando_lista);
@@ -428,6 +439,40 @@ public class frmCadastroMidia extends javax.swing.JFrame {
     private void jbtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchActionPerformed
         search();
     }//GEN-LAST:event_jbtnSearchActionPerformed
+
+    private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
+        MidiaBean midia = new MidiaBean();
+        
+        
+        midia.setId(jtxtId.getText());
+        midia.setFornecedor_id(jcbxFornecedor.getSelectedItem().toString());
+        midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
+        midia.setGenero(jcbxGenero.getSelectedItem().toString());
+        midia.setCensura(jcbxCensura.getSelectedItem().toString());
+        
+        midia.setTitulo(jtxtTitulo.getText());
+        midia.setAutor(jtxtAutor.getText());
+        midia.setDiretor(jtxtDiretor.getText());
+        midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
+        midia.setData_lancamento(jftxtDataLancamento.getText());
+        
+        midia.setSinopse(jtxtSinopse.getText());
+        midia.setValor_custo(jtxtCusto.getText());
+        midia.setValor_locacao(jtxtLocacao.getText());
+       
+        for(int i=0; i < carregando_lista.size();i++) 
+            if(midia.getId().equals(carregando_lista.get(i).getId())){
+                Editar.editRegisterMidia(midia);
+                
+                clear();
+                JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
+
+            } 
+            else {
+            JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
+                JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+        }
+    }//GEN-LAST:event_jbtnEditarActionPerformed
 
     private void clear(){
         jtxtId.setText(null);
@@ -497,6 +542,7 @@ public class frmCadastroMidia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtnEditar;
     private javax.swing.JButton jbtnNovo;
     private javax.swing.JButton jbtnRemover;
     private javax.swing.JButton jbtnSair;
@@ -519,9 +565,7 @@ public class frmCadastroMidia extends javax.swing.JFrame {
 private void search(){
             String id = jtxtId.getText();
             MidiaBean midia = Leitor.searchRegisterMidia(id);
-            
-            
-            jtxtId.setText(null);
+            jcbxFornecedor.setSelectedItem(midia.getFornecedor_id());
             jcbxGrupo.setSelectedItem(midia.getGrupo());
             jcbxGenero.setSelectedItem(midia.getGenero());
             jcbxCensura.setSelectedItem(midia.getCensura());
@@ -529,7 +573,9 @@ private void search(){
             jtxtAutor.setText(midia.getAutor());
             jtxtDiretor.setText(midia.getDiretor());
             jcbxCategoria.setSelectedItem(midia.getCategoria());
+            jftxtDataLancamento.setText(midia.getData_lancamento());
             
+            jtxtSinopse.setText(midia.getSinopse());
             jtxtCusto.setText(midia.getValor_custo());
             jtxtLocacao.setText(midia.getValor_locacao());
     }

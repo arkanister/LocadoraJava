@@ -5,37 +5,35 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class frmMovimentacao extends javax.swing.JFrame {
-    ArrayList<MovimentoBean> carregar_lista_movimento;
-    
-    Object titulo[] = {"Código cliente", "Título", "Valor", "Data"};
-    Object grade[][] = null;
-    DefaultTableModel modelo = new DefaultTableModel(grade, titulo);
-    
-    ArrayList<MidiaBean> carregar_lista_midia;
-    
-    public frmMovimentacao() {
-        initComponents();
-        setLocationRelativeTo(null);
-        
-        this.carregar_lista_midia = Leitor.loaderFileMidia();
-        
-        this.carregar_lista_movimento = Leitor.loaderFileMovimento();
-        jtMovimento.setModel(modelo);
-        
-        for(int i=0; i < carregar_lista_midia.size(); i++){
-            jcbxMidia.addItem(carregar_lista_midia.get(i).getTitulo().toString());
-        }
-//Tabela        
-        for(int i = 1; i < carregar_lista_movimento.size(); i++){
-        Object campos[] = {carregar_lista_movimento.get(i).getId(),
-                            carregar_lista_movimento.get(i).getCliente_id(),
-                            //carregar_lista_midia.get(i).getData_emprestimo(),
-                            //carregar_lista_midia.get(i).getData_devolucao(),
-                            carregar_lista_movimento.get(i).getValor_total()};
-        
-        modelo.addRow(campos);
-        }
-    }
+//    ArrayList<MovimentoBean> carregar_lista_movimento;
+//    
+//    Object titulo[] = {"Código cliente", "Título", "Valor", "Data"};
+//    Object grade[][] = null;
+//    DefaultTableModel modelo = new DefaultTableModel(grade, titulo);
+//    
+//    ArrayList<MidiaBean> carregar_lista_midia;
+//    
+//    public frmMovimentacao() {
+//        initComponents();
+//        setLocationRelativeTo(null);
+//        
+//        this.carregar_lista_midia = Leitor.loaderFileMidia();
+//        
+//        this.carregar_lista_movimento = Leitor.loaderFileMovimento();
+//        jtMovimento.setModel(modelo);
+//        
+//        for(int i=0; i < carregar_lista_midia.size(); i++){
+//            jcbxMidia.addItem(carregar_lista_midia.get(i).getTitulo().toString());
+//        }
+////Tabela        
+//        for(int i = 1; i < carregar_lista_movimento.size(); i++){
+//        Object campos[] = {carregar_lista_movimento.get(i).getId(),
+//                            carregar_lista_movimento.get(i).getCliente_id(),
+//                            carregar_lista_movimento.get(i).getValor_total()};
+//        
+//        modelo.addRow(campos);
+//        }
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -163,7 +161,7 @@ public class frmMovimentacao extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
@@ -266,8 +264,8 @@ public class frmMovimentacao extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,69 +277,69 @@ public class frmMovimentacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarActionPerformed
-        try{
-            
-            jtMovimento.setModel(modelo);
-            Integer id = jtMovimento.getRowCount();
-    
-            String nome = jcbxMidia.getSelectedItem().toString();
-            String valor = "";
-
-            for(int i = 0; i < carregar_lista_midia.size(); i++){
-                valor = carregar_lista_midia.get(i).getValor_locacao();
-            }
-
-            Object campos[] = {id, nome, valor };
-            modelo.addRow(campos);
-            double total = 0;
-
-            for(int i=0; i < jtMovimento.getRowCount(); i++){
-                total += Double.valueOf(modelo.getValueAt(i, 2).toString());      
-            jtxtValorTotal.setText(String.valueOf(total));
-        }
-            } catch (Exception ex){
-                JOptionPane.showMessageDialog(null, "Cadastro Vazio");
-        }
+//        try{
+//            
+//            jtMovimento.setModel(modelo);
+//            Integer id = jtMovimento.getRowCount();
+//    
+//            String nome = jcbxMidia.getSelectedItem().toString();
+//            String valor = "";
+//
+//            for(int i = 0; i < carregar_lista_midia.size(); i++){
+//                valor = carregar_lista_midia.get(i).getValor_locacao();
+//            }
+//
+//            Object campos[] = {id, nome, valor };
+//            modelo.addRow(campos);
+//            double total = 0;
+//
+//            for(int i=0; i < jtMovimento.getRowCount(); i++){
+//                total += Double.valueOf(modelo.getValueAt(i, 2).toString());      
+//            jtxtValorTotal.setText(String.valueOf(total));
+//        }
+//            } catch (Exception ex){
+//                JOptionPane.showMessageDialog(null, "Cadastro Vazio");
+//        }
     }//GEN-LAST:event_jbtnAdicionarActionPerformed
 
     private void jbtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalvarActionPerformed
-        JOptionPane.showMessageDialog(null, "Registrado com Sucesso!");
-        String total = jtxtValorTotal.getText();
-        String pago = jtxtValorPago.getText();
-        
-        double somar = Double.valueOf(pago) - Double.valueOf(total);
-        jtxtValorMulta.setText(String.valueOf(somar));
-        
-        MovimentoBean movimento = new MovimentoBean();
-        
-        movimento.setId(String.valueOf(modelo.getRowCount()));
-        movimento.setCliente_id(jtxtId.getText());
-        movimento.setMidia_id(jcbxMidia.getSelectedItem().toString());
-        //movimento.setData_locacao(null);
-        //movimento.setData_devolucao(null);
-        movimento.setValor_total(jtxtValorTotal.getText());
-        movimento.setValor_multa(jtxtValorMulta.getText());
-        movimento.setValor_pago(jtxtValorPago.getText());
-        movimento.setValor_saldo(jtxtValorTotal.getText());
-        
-        carregar_lista_movimento.add(movimento);
-        Salvar.saveFileMovimento(carregar_lista_movimento);
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-        
+//        JOptionPane.showMessageDialog(null, "Registrado com Sucesso!");
+//        String total = jtxtValorTotal.getText();
+//        String pago = jtxtValorPago.getText();
+//        
+//        double somar = Double.valueOf(pago) - Double.valueOf(total);
+//        jtxtValorMulta.setText(String.valueOf(somar));
+//        
+//        MovimentoBean movimento = new MovimentoBean();
+//        
+//        movimento.setId(String.valueOf(modelo.getRowCount()));
+//        movimento.setCliente_id(jtxtId.getText());
+//        movimento.setMidia_id(jcbxMidia.getSelectedItem().toString());
+//        //movimento.setData_locacao(null);
+//        //movimento.setData_devolucao(null);
+//        movimento.setValor_total(jtxtValorTotal.getText());
+//        movimento.setValor_multa(jtxtValorMulta.getText());
+//        movimento.setValor_pago(jtxtValorPago.getText());
+//        movimento.setValor_saldo(jtxtValorTotal.getText());
+//        
+//        carregar_lista_movimento.add(movimento);
+//        Salvar.saveFileMovimento(carregar_lista_movimento);
+//        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+//        
         
     }//GEN-LAST:event_jbtnSalvarActionPerformed
 
     private void jbtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchActionPerformed
-        String id = jtxtId.getText();
-       
-        ClienteBean cliente = Leitor.searchFileCliente(id);
-        try{
-            if (String.valueOf(cliente.getId()) != null) 
-                jtxtId.setText(id);
-                System.out.println(id);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao encontrado");
-        }
+//        String id = jtxtId.getText();
+//       
+//        ClienteBean cliente = Leitor.searchFileCliente(id);
+//        try{
+//            if (String.valueOf(cliente.getId()) != null) 
+//                jtxtId.setText(id);
+//                System.out.println(id);
+//        }catch(Exception ex){
+//            JOptionPane.showMessageDialog(null, "Nao encontrado");
+//        }
     }//GEN-LAST:event_jbtnSearchActionPerformed
     
     public static void main(String args[]) {

@@ -8,6 +8,7 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
     
     public frmCadastroFornecedor(){
         initComponents();
+        
         setLocationRelativeTo(null);
         this.carregando_lista = Leitor.loaderFileFornecedor();
     }
@@ -16,8 +17,10 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jbtnNovo = new javax.swing.JButton();
+        jbtnSalvar = new javax.swing.JButton();
         jbtnSair = new javax.swing.JButton();
+        jbtnRemover = new javax.swing.JButton();
+        jbtnEditar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jtxtCep = new javax.swing.JTextField();
@@ -50,15 +53,19 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jtxtId = new javax.swing.JTextField();
+        jbtnSearch = new javax.swing.JButton();
+        jcbxSituacao = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setBackground(java.awt.Color.white);
 
-        jbtnNovo.setBackground(new java.awt.Color(153, 255, 153));
-        jbtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/save/save-32.png"))); // NOI18N
-        jbtnNovo.setToolTipText("Adicionar");
-        jbtnNovo.addActionListener(new java.awt.event.ActionListener() {
+        jbtnSalvar.setBackground(new java.awt.Color(153, 255, 153));
+        jbtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/save/save-32.png"))); // NOI18N
+        jbtnSalvar.setToolTipText("Adicionar");
+        jbtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnNovoActionPerformed(evt);
+                jbtnSalvarActionPerformed(evt);
             }
         });
 
@@ -70,6 +77,22 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jbtnRemover.setBackground(new java.awt.Color(255, 102, 102));
+        jbtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/delete/delete-32.png"))); // NOI18N
+        jbtnRemover.setToolTipText("Remover");
+        jbtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverActionPerformed(evt);
+            }
+        });
+
+        jbtnEditar.setText("Editar");
+        jbtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -78,7 +101,11 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jbtnSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jbtnEditar)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -87,7 +114,9 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbtnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -269,6 +298,13 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel16.setText("Código:");
 
+        jbtnSearch.setText("Search");
+        jbtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -278,7 +314,9 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbtnSearch)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,33 +324,39 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnSearch))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jcbxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jcbxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -331,8 +375,51 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jbtnSairActionPerformed
 
-    private void jbtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNovoActionPerformed
+    private void jbtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalvarActionPerformed
         FornecedorBean fornecedor = new FornecedorBean();
+        
+        fornecedor.setId(Integer.parseInt(jtxtId.getText()));
+        fornecedor.setCnpj(jtxtCnpj.getText());
+        fornecedor.setIe(jtxtIe.getText());
+        fornecedor.setRazao_social(jtxtRazaoSocial.getText());
+        //Endereco.
+        fornecedor.setCep(jtxtCep.getText());
+        fornecedor.setLogradouro(jtxtLogradouro.getText());
+        fornecedor.setNumero_logradouro(Integer.parseInt(jtxtNumero_logradouro.getText()));
+        fornecedor.setBairro(jtxtBairro.getText());
+        fornecedor.setMunicipio(jcbxMunicipio.getSelectedItem().toString());
+        fornecedor.setUf(jcbxUf.getSelectedItem().toString());
+        fornecedor.setPais(jcbxPais.getSelectedItem().toString());
+        //Contato.
+        fornecedor.setNumero_telefone(jtxtTelefone.getText());
+        fornecedor.setNumero_celular(jtxtCelular.getText());
+        fornecedor.setEmail(jtxtEmail.getText());
+        //Situacao Ativo ou Inativo
+        fornecedor.setSituacao(jcbxSituacao.getSelectedItem().toString());
+        carregando_lista.add(fornecedor);
+
+        Salvar.saveFileFornecedor(carregando_lista);
+        
+        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+        clear();
+    }//GEN-LAST:event_jbtnSalvarActionPerformed
+
+    private void jbtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverActionPerformed
+        FornecedorBean fornecedor = new FornecedorBean();
+        boolean remover = Remover.removeRegistroFornecedor(jtxtId.getText());
+        
+        Integer msg = JOptionPane.showConfirmDialog(null, "TESTE", "MENSAGEM", JOptionPane.OK_OPTION);
+        if(msg == JOptionPane.OK_OPTION){
+            remover = true;
+            clear();
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Nem tem este bagaça");
+    }//GEN-LAST:event_jbtnRemoverActionPerformed
+
+    private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
+        FornecedorBean fornecedor = new FornecedorBean();
+        
         
         fornecedor.setId(Integer.parseInt(jtxtId.getText()));
         fornecedor.setCnpj(jtxtCnpj.getText());
@@ -351,13 +438,24 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
         fornecedor.setNumero_celular(jtxtCep.getText());
         fornecedor.setEmail(jtxtCep.getText());
         //Situacao Ativo ou Inativo
-       
-        carregando_lista.add(fornecedor);
+        fornecedor.setSituacao(jcbxSituacao.getSelectedItem().toString());
 
-        Salvar.saveFileFornecedor(carregando_lista);
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-        clear();
-    }//GEN-LAST:event_jbtnNovoActionPerformed
+        for(int i=0; i < carregando_lista.size();i++) 
+            if(fornecedor.getId()==carregando_lista.get(i).getId()){
+            Editar.editRegisterFornecedor(fornecedor);
+            clear();
+            JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
+
+            } 
+            else {
+            JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
+                JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+        }
+   }//GEN-LAST:event_jbtnEditarActionPerformed
+
+    private void jbtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchActionPerformed
+        search();
+    }//GEN-LAST:event_jbtnSearchActionPerformed
     
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -411,10 +509,14 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JButton jbtnNovo;
+    private javax.swing.JButton jbtnEditar;
+    private javax.swing.JButton jbtnRemover;
     private javax.swing.JButton jbtnSair;
+    private javax.swing.JButton jbtnSalvar;
+    private javax.swing.JButton jbtnSearch;
     private javax.swing.JComboBox jcbxMunicipio;
     private javax.swing.JComboBox jcbxPais;
+    private javax.swing.JComboBox jcbxSituacao;
     private javax.swing.JComboBox jcbxUf;
     private javax.swing.JTextField jtxtBairro;
     private javax.swing.JTextField jtxtCelular;
@@ -442,5 +544,36 @@ public class frmCadastroFornecedor extends javax.swing.JFrame {
         jtxtTelefone.setText(null);
         jtxtCelular.setText(null);
         jtxtEmail.setText(null);
+    }
+    
+    private void search(){
+        String id = jtxtId.getText();
+       
+        FornecedorBean fornecedor = Leitor.searchRegisterFornecedor(id);
+        
+        if (String.valueOf(fornecedor.getId()) != null) {
+            jtxtId.setText(String.valueOf(fornecedor.getId()));
+            jtxtCnpj.setText(fornecedor.getCnpj());
+            jtxtIe.setText(fornecedor.getIe());
+            jtxtRazaoSocial.setText(fornecedor.getRazao_social());
+        //Endereco.
+            jtxtCep.setText(fornecedor.getCep());
+            jtxtLogradouro.setText(fornecedor.getLogradouro());
+            jtxtNumero_logradouro.setText(String.valueOf(fornecedor.getNumero_logradouro()));
+            jtxtBairro.setText(fornecedor.getBairro());
+            jcbxMunicipio.setSelectedItem(fornecedor.getMunicipio());
+            jcbxUf.setSelectedItem(fornecedor.getUf());
+            jcbxPais.setSelectedItem(fornecedor.getPais());
+        //Contato.
+            jtxtTelefone.setText(fornecedor.getNumero_telefone());
+            jtxtCelular.setText(fornecedor.getNumero_celular());
+            jtxtEmail.setText(fornecedor.getEmail());
+       
+        //Situacao Ativo ou Inativo
+            jcbxSituacao.setSelectedItem(fornecedor.getSituacao());
+    }
+        
+        else
+            JOptionPane.showMessageDialog(null, "O registro não pode ser encontrado");
     }
 }

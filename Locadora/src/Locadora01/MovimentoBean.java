@@ -1,22 +1,27 @@
 package Locadora01;
 
 public class MovimentoBean {
-    protected String id;
-    protected String cliente_id;
-    protected String midia_id;
-    protected String valor_total;
-    protected String valor_multa;
-    protected String valor_pago;
-    protected String valor_saldo;
-    protected String data_locacao;
-    protected String data_devolucao;
+//Locacao
+        protected String cliente_id;
+        protected String locacao_id;
+        protected String midia_titulo;
+        protected String midia_valor_locacao;
+        protected String midia_grupo;
+        protected String data_locacao;
+        protected String valor_total;
+//Devolução
+        protected String devolucao_id;
+        protected String valor_multa;
+        protected String valor_pago;
+        protected String valor_saldo;
+        protected String data_devolucao;
 
-    public String getId() {
-        return id;
+    public String getDevolucao_id() {
+        return devolucao_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDevolucao_id(String id) {
+        this.devolucao_id = id;
     }
 
     public String getValor_total() {
@@ -75,11 +80,35 @@ public class MovimentoBean {
         this.cliente_id = cliente_id;
     }
 
-    public String getMidia_id() {
-        return midia_id;
+    public String getLocacao_id() {
+        return locacao_id;
     }
 
-    public void setMidia_id(String midia_id) {
-        this.midia_id = midia_id;
+    public void setLocacao_id(String locacao_id) {
+        this.locacao_id = locacao_id;
+    }
+
+    public String getMidia_titulo() {
+        return midia_titulo;
+    }
+
+    public void setMidia_titulo(String midia_titulo) {
+        this.midia_titulo = midia_titulo;
+    }
+
+    public String getMidia_valor_locacao() {
+        return midia_valor_locacao;
+    }
+
+    public void setMidia_valor_locacao(String midia_valor_locacao) {
+        this.midia_valor_locacao = midia_valor_locacao;
+    }
+
+    public String getMidia_grupo() {
+        return midia_grupo;
+    }
+
+    public void setMidia_grupo(String midia_grupo) {
+        this.midia_grupo = midia_grupo;
     }
 }

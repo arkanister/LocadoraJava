@@ -11,7 +11,9 @@ public class Salvar {
     public static final String LOCAL_FORNECEDOR = ("c:"+ BARRA + "Locadora" + BARRA + "Fornecedores.txt");
     public static final String LOCAL_CLIENTE = ("c:"+ BARRA + "Locadora" + BARRA + "Clientes.txt");
     public static final String LOCAL_MIDIA = ("c:"+ BARRA + "Locadora" + BARRA + "Midias.txt");
-    public static final String LOCAL_MOVIMENTO = ("c:"+ BARRA + "Locadora" + BARRA + "Movimentos.txt");
+    public static final String LOCAL_LOCACAO = ("c:"+ BARRA + "Locadora" + BARRA + "Locacoes.txt");
+    public static final String LOCAL_DEVOLUCAO = ("c:"+ BARRA + "Locadora" + BARRA + "Devolucoes.txt");
+    
     
     //Metodo responsavel por gravar os dados que estão armazenados no array list no arquivo
     public static boolean  saveFileFornecedor(ArrayList<FornecedorBean> fornecedores){
@@ -114,15 +116,16 @@ public class Salvar {
                 //Daodos Básico.
                 fw.write(midia.getId()+";");
                 fw.write(midia.getFornecedor_id()+";");
-                fw.write(midia.getGenero()+";");
                 fw.write(midia.getGrupo()+";");
+                fw.write(midia.getGenero()+";");
                 fw.write(midia.getCensura()+";");
                 //Endereço.
                 fw.write(midia.getTitulo()+";");
-                fw.write(midia.getCategoria()+";");
                 fw.write(midia.getAutor()+";");
                 fw.write(midia.getDiretor()+";");
+                fw.write(midia.getCategoria()+";");
                 fw.write(midia.getData_lancamento()+";");
+                fw.write(midia.getSinopse()+";");
                 fw.write(midia.getValor_custo()+";");
                 fw.write(midia.getValor_locacao()+"\n");
             }
@@ -135,8 +138,8 @@ public class Salvar {
         }
     }
     
-    public static boolean  saveFileMovimento(ArrayList<MovimentoBean> movimentos){
-        File file = new File(LOCAL_MOVIMENTO);
+    public static boolean  saveFileLocacao(ArrayList<MovimentoBean> movimentos){
+        File file = new File(LOCAL_LOCACAO);
     
         try{
             //Se o arquivo não existir ele vai criar um novo.
@@ -149,13 +152,12 @@ public class Salvar {
                 
                 MovimentoBean movimento = movimentos.get(i);
                 //Daodos Básico.
-                fw.write(movimento.getId()+";");
+                fw.write(movimento.getLocacao_id()+";");
                 fw.write(movimento.getCliente_id()+";");
-                fw.write(movimento.getMidia_id()+";");
+                fw.write(movimento.getMidia_grupo()+";");
+                fw.write(movimento.getMidia_titulo()+";");
+                fw.write(movimento.getMidia_valor_locacao()+";");
                 fw.write(movimento.getData_locacao()+";");
-                fw.write(movimento.getData_devolucao()+";");
-                fw.write(movimento.getValor_total()+";");
-                fw.write(movimento.getValor_pago()+";");
                 fw.write(movimento.getValor_total()+"\n");
             }
         fw.flush();
@@ -165,6 +167,8 @@ public class Salvar {
         } catch(IOException ex){
             return false;
         }
+        
+       
     }
     
 }

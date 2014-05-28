@@ -16,9 +16,14 @@ public class frmCadastroCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jbtnEditar = new javax.swing.JButton();
+        jbtnRemover = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jbtnNovo = new javax.swing.JButton();
         jbtnSair = new javax.swing.JButton();
+        jbtnEditar1 = new javax.swing.JButton();
+        jbtnRemover1 = new javax.swing.JButton();
+        jcbxSituacao = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jtxtCpf = new javax.swing.JTextField();
         jtxtRg = new javax.swing.JTextField();
@@ -55,6 +60,22 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         jtxtId = new javax.swing.JTextField();
         jbtnSearch = new javax.swing.JButton();
 
+        jbtnEditar.setText("Editar");
+        jbtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditarActionPerformed(evt);
+            }
+        });
+
+        jbtnRemover.setBackground(new java.awt.Color(255, 102, 102));
+        jbtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/delete/delete-32.png"))); // NOI18N
+        jbtnRemover.setToolTipText("Remover");
+        jbtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoverActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(654, 650));
 
@@ -75,15 +96,43 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        jbtnEditar1.setText("Editar");
+        jbtnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditar1ActionPerformed(evt);
+            }
+        });
+
+        jbtnRemover1.setBackground(new java.awt.Color(255, 102, 102));
+        jbtnRemover1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/delete/delete-32.png"))); // NOI18N
+        jbtnRemover1.setToolTipText("Remover");
+        jbtnRemover1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemover1ActionPerformed(evt);
+            }
+        });
+
+        jcbxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbtnSair)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbtnSair)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnEditar1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jcbxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -91,9 +140,16 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(4, 4, 4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbtnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                            .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtnRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtnEditar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(4, 4, 4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jcbxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados pessoais"));
@@ -299,6 +355,11 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         jbtnSearch.setBackground(new java.awt.Color(120, 168, 219));
         jbtnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/search/search-26.png"))); // NOI18N
         jbtnSearch.setBorder(null);
+        jbtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -334,18 +395,22 @@ public class frmCadastroCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,6 +450,7 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         cliente.setNumero_telefone(jtxtNumeroTelefone.getText());
         cliente.setNumero_celular(jtxtNumeroCelular.getText());
         cliente.setEmail(jtxtEmail.getText());
+        cliente.setSituacao(jcbxSituacao.getSelectedItem().toString());
         //Situacao Ativo ou Inativo
        
         carregando_lista.add(cliente);
@@ -393,6 +459,109 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Salvo com sucesso");
         clear();
     }//GEN-LAST:event_jbtnNovoActionPerformed
+
+    private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
+        ClienteBean cliente = new ClienteBean();
+
+
+        cliente.setId(Integer.parseInt(jtxtId.getText()));
+        cliente.setCpf(jtxtCpf.getText());
+        cliente.setRg(jtxtRg.getText());
+        cliente.setNome(jtxtNome.getText());
+        //Endereco.
+        cliente.setCep(jtxtCep.getText());
+        cliente.setLogradouro(jtxtLogradouro.getText());
+        cliente.setNumero_logradouro(Integer.parseInt(jtxtNumeroLogradouro.getText()));
+        cliente.setBairro(jtxtBairro.getText());
+        cliente.setMunicipio(jcbxMunicipio.getSelectedItem().toString());
+        cliente.setUf(jcbxUf.getSelectedItem().toString());
+        cliente.setPais(jcbxPais.getSelectedItem().toString());
+        //Contato.
+        cliente.setNumero_telefone(jtxtCep.getText());
+        cliente.setNumero_celular(jtxtCep.getText());
+        cliente.setEmail(jtxtCep.getText());
+        //Situacao Ativo ou Inativo
+        cliente.setSituacao(jcbxSituacao.getSelectedItem().toString());
+
+        for (int i = 0; i < carregando_lista.size(); i++) {
+            if (cliente.getId() == carregando_lista.get(i).getId()) {
+                Editar.editRegisterCliente(cliente);
+                clear();
+                JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
+
+            } else {
+                JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
+                        JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+            }
+        }
+    }//GEN-LAST:event_jbtnEditarActionPerformed
+
+    private void jbtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverActionPerformed
+        ClienteBean cliente = new ClienteBean();
+        boolean remover = Remover.removeRegistroCliente(jtxtId.getText());
+
+        Integer msg = JOptionPane.showConfirmDialog(null, "TESTE", "MENSAGEM", JOptionPane.OK_OPTION);
+        if (msg == JOptionPane.OK_OPTION) {
+            remover = true;
+            clear();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nem tem este bagaça");
+        }
+    }//GEN-LAST:event_jbtnRemoverActionPerformed
+
+    private void jbtnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditar1ActionPerformed
+        ClienteBean cliente = new ClienteBean();
+
+
+        cliente.setId(Integer.parseInt(jtxtId.getText()));
+        cliente.setCpf(jtxtCpf.getText());
+        cliente.setRg(jtxtRg.getText());
+        cliente.setNome(jtxtNome.getText());
+        //Endereco.
+        
+        cliente.setCep(jtxtCep.getText());
+        cliente.setLogradouro(jtxtLogradouro.getText());
+        cliente.setNumero_logradouro(Integer.parseInt(jtxtNumeroLogradouro.getText()));
+        cliente.setBairro(jtxtBairro.getText());
+        cliente.setMunicipio(jcbxMunicipio.getSelectedItem().toString());
+        cliente.setUf(jcbxUf.getSelectedItem().toString());
+        cliente.setPais(jcbxPais.getSelectedItem().toString());
+        //Contato.
+        cliente.setNumero_telefone(jtxtNumeroTelefone.getText());
+        cliente.setNumero_celular(jtxtNumeroCelular.getText());
+        cliente.setEmail(jtxtEmail.getText());
+        //Situacao Ativo ou Inativo
+        cliente.setSituacao(jcbxSituacao.getSelectedItem().toString());
+
+        for (int i = 0; i < carregando_lista.size(); i++) {
+            if (cliente.getId() == carregando_lista.get(i).getId()) {
+                Editar.editRegisterCliente(cliente);
+                clear();
+                JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
+
+            } else {
+                JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
+                        JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+            }
+        }
+    }//GEN-LAST:event_jbtnEditar1ActionPerformed
+
+    private void jbtnRemover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemover1ActionPerformed
+        ClienteBean cliente = new ClienteBean();
+        boolean remover = Remover.removeRegistroCliente(jtxtId.getText());
+
+        Integer msg = JOptionPane.showConfirmDialog(null, "TESTE", "MENSAGEM", JOptionPane.OK_OPTION);
+        if (msg == JOptionPane.OK_OPTION) {
+            remover = true;
+            clear();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nem tem este bagaça");
+        }
+    }//GEN-LAST:event_jbtnRemover1ActionPerformed
+
+    private void jbtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchActionPerformed
+        search();
+    }//GEN-LAST:event_jbtnSearchActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -446,11 +615,16 @@ public class frmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton jbtnEditar;
+    private javax.swing.JButton jbtnEditar1;
     private javax.swing.JButton jbtnNovo;
+    private javax.swing.JButton jbtnRemover;
+    private javax.swing.JButton jbtnRemover1;
     private javax.swing.JButton jbtnSair;
     private javax.swing.JButton jbtnSearch;
     private javax.swing.JComboBox jcbxMunicipio;
     private javax.swing.JComboBox jcbxPais;
+    private javax.swing.JComboBox jcbxSituacao;
     private javax.swing.JComboBox jcbxUf;
     private javax.swing.JFormattedTextField jdtxtAniversario;
     private javax.swing.JTextField jtxtBairro;
@@ -479,6 +653,38 @@ public class frmCadastroCliente extends javax.swing.JFrame {
         jtxtNumeroTelefone.setText(null);
         jtxtNumeroCelular.setText(null);
         jtxtEmail.setText(null);
+    }
+ 
+ private void search(){
+        String id = jtxtId.getText();
+       
+        ClienteBean cliente = Leitor.searchFileCliente(id);
+        
+        if (String.valueOf(cliente.getId()) != null) {
+            jtxtId.setText(String.valueOf(cliente.getId()));
+            jtxtCpf.setText(cliente.getCpf());
+            jtxtRg.setText(cliente.getRg());
+            jtxtNome.setText(cliente.getNome());
+            jdtxtAniversario.setText(cliente.getData_aniversario());
+        //Endereco.
+            jtxtCep.setText(cliente.getCep());
+            jtxtLogradouro.setText(cliente.getLogradouro());
+            jtxtNumeroLogradouro.setText(String.valueOf(cliente.getNumero_logradouro()));
+            jtxtBairro.setText(cliente.getBairro());
+            jcbxMunicipio.setSelectedItem(cliente.getMunicipio());
+            jcbxUf.setSelectedItem(cliente.getUf());
+            jcbxPais.setSelectedItem(cliente.getPais());
+        //Contato.
+            jtxtNumeroTelefone.setText(cliente.getNumero_telefone());
+            jtxtNumeroCelular.setText(cliente.getNumero_celular());
+            jtxtEmail.setText(cliente.getEmail());
+       
+        //Situacao Ativo ou Inativo
+            jcbxSituacao.setSelectedItem(cliente.getSituacao());
+    }
+        
+        else
+            JOptionPane.showMessageDialog(null, "O registro não pode ser encontrado");
     }
 
 }

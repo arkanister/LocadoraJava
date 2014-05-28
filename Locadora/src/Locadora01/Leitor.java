@@ -148,7 +148,7 @@ public class Leitor {
                 
                 
                 if (id.trim().equals(idTela.trim())) {
-                cliente.setId(Integer.parseInt(st.nextToken()));
+                cliente.setId(Integer.parseInt(id));
                 cliente.setCpf(st.nextToken());
                 cliente.setRg(st.nextToken());
                 cliente.setNome(st.nextToken());
@@ -202,6 +202,8 @@ public class Leitor {
                 midia.setAutor(st.nextToken());
                 midia.setDiretor(st.nextToken());
                 midia.setCategoria(st.nextToken());
+                midia.setData_lancamento(st.nextToken());
+                midia.setSinopse(st.nextToken());
                 midia.setValor_custo(st.nextToken());
                 midia.setValor_locacao(st.nextToken());
                 
@@ -227,7 +229,7 @@ public class Leitor {
                 String id = st.nextToken();
 
                 if (id.trim().equals(idTela.trim())) {
-                    midia.setId(st.nextToken());
+                    midia.setId(id);
                     midia.setFornecedor_id(st.nextToken());
                     midia.setGrupo(st.nextToken());
                     midia.setGenero(st.nextToken());
@@ -236,6 +238,8 @@ public class Leitor {
                     midia.setAutor(st.nextToken());
                     midia.setDiretor(st.nextToken());
                     midia.setCategoria(st.nextToken());
+                    midia.setData_lancamento(st.nextToken());
+                    midia.setSinopse(st.nextToken());
                     midia.setValor_custo(st.nextToken());
                     midia.setValor_locacao(st.nextToken());
                     break;
@@ -251,11 +255,11 @@ public class Leitor {
        return midia;
     }
     
-    public static ArrayList<MovimentoBean> loaderFileMovimento(){
+    public static ArrayList<MovimentoBean> loaderFileLocacao(){
         ArrayList<MovimentoBean> movimentos = new ArrayList();
 
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_MOVIMENTO));
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_LOCACAO));
 
             while(reader.ready()){
                 String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
@@ -263,15 +267,13 @@ public class Leitor {
                 
                 MovimentoBean movimento = new MovimentoBean();
 
-                movimento.setId(st.nextToken());
+                movimento.setLocacao_id(st.nextToken());
                 movimento.setCliente_id(st.nextToken());
-                movimento.setMidia_id(st.nextToken());
-                movimento.setData_locacao(st.nextToken());
+                movimento.setMidia_titulo(st.nextToken());
+                movimento.setMidia_grupo(st.nextToken());
+                movimento.setMidia_valor_locacao(st.nextToken());
                 movimento.setData_locacao(st.nextToken());
                 movimento.setValor_total(st.nextToken());
-                movimento.setValor_multa(st.nextToken());
-                movimento.setValor_pago(st.nextToken());
-                movimento.setValor_saldo(st.nextToken());
 
                 movimentos.add(movimento);
             }
@@ -283,11 +285,11 @@ public class Leitor {
         return movimentos;
     }
     
-    public static MovimentoBean searchRegisterMovimento(String idTela) {
+    public static MovimentoBean searchRegisterLocacao(String idTela) {
         MovimentoBean movimento = new MovimentoBean();
 
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_MOVIMENTO));
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_LOCACAO));
 
             while(reader.ready()){
                 String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
@@ -295,15 +297,13 @@ public class Leitor {
                 String id = st.nextToken();
 
                 if (id.trim().equals(idTela.trim())) {
-                    movimento.setId(st.nextToken());
+                    movimento.setLocacao_id(st.nextToken());
                     movimento.setCliente_id(st.nextToken());
-                    movimento.setMidia_id(st.nextToken());
-                    movimento.setData_locacao(st.nextToken());
+                    movimento.setMidia_titulo(st.nextToken());
+                    movimento.setMidia_grupo(st.nextToken());
+                    movimento.setMidia_valor_locacao(st.nextToken());
                     movimento.setData_locacao(st.nextToken());
                     movimento.setValor_total(st.nextToken());
-                    movimento.setValor_multa(st.nextToken());
-                    movimento.setValor_pago(st.nextToken());
-                    movimento.setValor_saldo(st.nextToken());
                     break;
                 }
             }

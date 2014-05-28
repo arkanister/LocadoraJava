@@ -1,3 +1,4 @@
+import Locadora01.Editar;
 import com.sun.org.apache.xerces.internal.impl.dtd.models.DFAContentModel;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -449,40 +450,40 @@ public class frmFornecedorBean extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        
-        FornecedorBean fornecedor = new FornecedorBean();
-        fornecedor = new FornecedorBean();
-        
-        fornecedor.setId(Integer.parseInt(txtId.getText()));
-        fornecedor.setCnpj(txtCnpj.getText());
-        fornecedor.setIe(txtIe.getText());
-        fornecedor.setRazao_social(txtRazaoSocial.getText());
-        //Endereco.
-        fornecedor.setCep(txtCep.getText());
-        fornecedor.setLogradouro(txtLogradouro.getText());
-        fornecedor.setNumero_logradouro(Integer.parseInt(txtNumero_logradouro.getText()));
-        fornecedor.setBairro(txtBairro.getText());
-        fornecedor.setMunicipio(cbxMunicipio.getSelectedItem().toString());
-        fornecedor.setUf(cbxUf.getSelectedItem().toString());
-        fornecedor.setPais(cbxPais.getSelectedItem().toString());
-        //Contato.
-        fornecedor.setNumero_telefone(txtCep.getText());
-        fornecedor.setNumero_celular(txtCep.getText());
-        fornecedor.setEmail(txtCep.getText());
-        //Situacao Ativo ou Inativo
-        fornecedor.setSituacao(cbxSituacao.getSelectedItem().toString());
-
-        for(int i=0; i < carregando_lista.size();i++) 
-            if(fornecedor.getId()==carregando_lista.get(i).getId()){
-            Editar.editRegister(fornecedor);
-            clear();
-            JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
-
-            } 
-            else {
-            JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
-                JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
-        }
+//        
+//        FornecedorBean fornecedor = new FornecedorBean();
+//        fornecedor = new FornecedorBean();
+//        
+//        fornecedor.setId(Integer.parseInt(txtId.getText()));
+//        fornecedor.setCnpj(txtCnpj.getText());
+//        fornecedor.setIe(txtIe.getText());
+//        fornecedor.setRazao_social(txtRazaoSocial.getText());
+//        //Endereco.
+//        fornecedor.setCep(txtCep.getText());
+//        fornecedor.setLogradouro(txtLogradouro.getText());
+//        fornecedor.setNumero_logradouro(Integer.parseInt(txtNumero_logradouro.getText()));
+//        fornecedor.setBairro(txtBairro.getText());
+//        fornecedor.setMunicipio(cbxMunicipio.getSelectedItem().toString());
+//        fornecedor.setUf(cbxUf.getSelectedItem().toString());
+//        fornecedor.setPais(cbxPais.getSelectedItem().toString());
+//        //Contato.
+//        fornecedor.setNumero_telefone(txtCep.getText());
+//        fornecedor.setNumero_celular(txtCep.getText());
+//        fornecedor.setEmail(txtCep.getText());
+//        //Situacao Ativo ou Inativo
+//        fornecedor.setSituacao(cbxSituacao.getSelectedItem().toString());
+//
+//        for(int i=0; i < carregando_lista.size();i++) 
+//            if(fornecedor.getId()==carregando_lista.get(i).getId()){
+//            Editar.editRegisterFornecedor(fornecedor);
+//            clear();
+//            JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
+//
+//            } 
+//            else {
+//            JOptionPane.showOptionDialog(this, "Campos Errados no cadastro", "Erro no Cadastro",
+//                JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+//        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void txtCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCnpjActionPerformed
