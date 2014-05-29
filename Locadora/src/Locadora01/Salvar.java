@@ -13,9 +13,10 @@ public class Salvar {
     public static final String LOCAL_MIDIA = ("c:"+ BARRA + "Locadora" + BARRA + "Midias.txt");
     public static final String LOCAL_LOCACAO = ("c:"+ BARRA + "Locadora" + BARRA + "Locacoes.txt");
     public static final String LOCAL_DEVOLUCAO = ("c:"+ BARRA + "Locadora" + BARRA + "Devolucoes.txt");
+    public static final String LOCAL_AUTOR = ("c:"+ BARRA + "Locadora" + BARRA + "Autores.txt");
+    public static final String LOCAL_DIRETOR = ("c:"+ BARRA + "Locadora" + BARRA + "Diretores.txt");
     
-    
-    //Metodo responsavel por gravar os dados que estão armazenados no array list no arquivo
+   //Metodo responsavel por gravar os dados que estão armazenados no array list no arquivo
     public static boolean  saveFileFornecedor(ArrayList<FornecedorBean> fornecedores){
         File file = new File(LOCAL_FORNECEDOR);
     
@@ -168,7 +169,8 @@ public class Salvar {
             return false;
         }
     }
-        public static boolean  saveFileDevolucao(ArrayList<MovimentoBean> movimentos){
+        
+    public static boolean  saveFileDevolucao(ArrayList<MovimentoBean> movimentos){
         File file = new File(LOCAL_DEVOLUCAO);
     
         try{
@@ -191,6 +193,56 @@ public class Salvar {
                 fw.write(movimento.getValor_multa()+";");
                 fw.write(movimento.getValor_pago()+";");
                 fw.write(movimento.getValor_saldo()+"\n");
+            }
+        fw.flush();
+        fw.close();
+        return true;
+        
+        } catch(IOException ex){
+            return false;
+        }
+     }
+
+    public static boolean  saveFileAutor(ArrayList<AutorBean> autores){
+        File file = new File(LOCAL_AUTOR);
+    
+        try{
+            //Se o arquivo não existir ele vai criar um novo.
+            if(!file.exists()) file.createNewFile();
+            //Instanciando um Gravador e indicando o arquivo que ele vai utilizar.
+            FileWriter fw = new FileWriter(file);
+            
+            for(int i=0; i < autores.size(); i++){
+                //Instanciado um novo autor e recebendo a utima posição da lista de autores.
+                AutorBean autor = autores.get(i);
+                //Dados Básico.
+                fw.write(autor.getId()+";");
+                fw.write(autor.getNome()+"\n");
+            }
+        fw.flush();
+        fw.close();
+        return true;
+        
+        } catch(IOException ex){
+            return false;
+        }
+    }
+        
+    public static boolean  saveFileDiretor(ArrayList<DiretorBean> diretores){
+        File file = new File(LOCAL_DIRETOR);
+    
+        try{
+            //Se o arquivo não existir ele vai criar um novo.
+            if(!file.exists()) file.createNewFile();
+            //Instanciando um Gravador e indicando o arquivo que ele vai utilizar.
+            FileWriter fw = new FileWriter(file);
+            
+            for(int i=0; i < diretores.size(); i++){
+                //Instanciado um novo diretor e recebendo a utima posição da lista de diretores.
+                DiretorBean diretor = diretores.get(i);
+                //Dados Básico.
+                fw.write(diretor.getId()+";");
+                fw.write(diretor.getNome()+"\n");
             }
         fw.flush();
         fw.close();

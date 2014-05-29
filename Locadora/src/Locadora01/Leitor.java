@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Leitor {
+    
     public static ArrayList<FornecedorBean> loaderFileFornecedor(){
         ArrayList<FornecedorBean> fornecedores = new ArrayList();
 
@@ -316,5 +317,109 @@ public class Leitor {
             System.out.println("Erro na leitura do arquivo");
        }
        return movimento;
+    }
+
+    public static ArrayList<AutorBean> loaderFileAutor(){
+        ArrayList<AutorBean> autores = new ArrayList();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_AUTOR));
+
+            while(reader.ready()){
+                String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
+                StringTokenizer st = new StringTokenizer(line, ";"); //Lendo a linha e verificando os valores.
+                
+                AutorBean autor = new AutorBean();
+
+                autor.setId(st.nextToken());
+                autor.setNome(st.nextToken());
+
+                autores.add(autor);
+            }
+            reader.close();
+
+        }catch(IOException ex){
+
+        }
+        return autores;
+    }
+
+    public static AutorBean searchRegisterAutor(String idTela) {
+        AutorBean autor = new AutorBean();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_AUTOR));
+
+            while(reader.ready()){
+                String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
+                StringTokenizer st = new StringTokenizer(line, ";"); //Lendo a linha e verificando os valores.
+                String id = st.nextToken();
+
+                if (id.trim().equals(idTela.trim())) {
+                    autor.setId(st.nextToken());
+                    autor.setNome(st.nextToken());
+                    break;
+                }
+            }
+            reader.close();
+
+       } catch (FileNotFoundException ex) {
+            System.out.println("TESTE não encontrado");
+       } catch (IOException ex) {
+            System.out.println("Erro na leitura do arquivo");
+       }
+       return autor;
+    }
+
+    public static ArrayList<DiretorBean> loaderFileDiretor(){
+        ArrayList<DiretorBean> diretores = new ArrayList();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_DIRETOR));
+
+            while(reader.ready()){
+                String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
+                StringTokenizer st = new StringTokenizer(line, ";"); //Lendo a linha e verificando os valores.
+                
+                DiretorBean diretor = new DiretorBean();
+
+                diretor.setId(st.nextToken());
+                diretor.setNome(st.nextToken());
+
+                diretores.add(diretor);
+            }
+            reader.close();
+
+        }catch(IOException ex){
+
+        }
+        return diretores;
+    }
+
+    public static DiretorBean searchRegisterDiretor(String idTela) {
+        DiretorBean diretor = new DiretorBean();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(Salvar.LOCAL_DIRETOR));
+
+            while(reader.ready()){
+                String line = reader.readLine(); //declarando uma variavel e recebendo a linha do arquivo.
+                StringTokenizer st = new StringTokenizer(line, ";"); //Lendo a linha e verificando os valores.
+                String id = st.nextToken();
+
+                if (id.trim().equals(idTela.trim())) {
+                    diretor.setId(st.nextToken());
+                    diretor.setNome(st.nextToken());
+                    break;
+                }
+            }
+            reader.close();
+
+       } catch (FileNotFoundException ex) {
+            System.out.println("TESTE não encontrado");
+       } catch (IOException ex) {
+            System.out.println("Erro na leitura do arquivo");
+       }
+       return diretor;
     }
 }

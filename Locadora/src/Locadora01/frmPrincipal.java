@@ -36,6 +36,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         smbCliente = new javax.swing.JMenuItem();
         smbMidia = new javax.swing.JMenuItem();
         smbAutor = new javax.swing.JMenuItem();
+        smbDiretor = new javax.swing.JMenuItem();
         Movimentacao = new javax.swing.JMenu();
         mbLocacao = new javax.swing.JMenuItem();
         mbDevolucao = new javax.swing.JMenuItem();
@@ -80,11 +81,20 @@ public class frmPrincipal extends javax.swing.JFrame {
         smbAutor.setText("Autor");
         mbCadastro.add(smbAutor);
 
+        smbDiretor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        smbDiretor.setText("Diretor");
+        smbDiretor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smbDiretorActionPerformed(evt);
+            }
+        });
+        mbCadastro.add(smbDiretor);
+
         mbPrincipal.add(mbCadastro);
 
         Movimentacao.setText("Movimento");
 
-        mbLocacao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        mbLocacao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK));
         mbLocacao.setText("Locação");
         mbLocacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +103,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         Movimentacao.add(mbLocacao);
 
-        mbDevolucao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        mbDevolucao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.SHIFT_MASK));
         mbDevolucao.setText("Devolução");
         Movimentacao.add(mbDevolucao);
 
@@ -132,6 +142,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
         setLocationRelativeTo(null);
     }//GEN-LAST:event_mbLocacaoActionPerformed
+
+    private void smbDiretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smbDiretorActionPerformed
+        
+    }//GEN-LAST:event_smbDiretorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +191,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenuItem smbAutor;
     private javax.swing.JMenuItem smbCliente;
+    private javax.swing.JMenuItem smbDiretor;
     private javax.swing.JMenuItem smbFornecedor;
     private javax.swing.JMenuItem smbMidia;
     private javax.swing.JMenuItem smbSair;

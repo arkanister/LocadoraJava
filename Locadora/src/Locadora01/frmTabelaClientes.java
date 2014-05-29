@@ -37,7 +37,6 @@ public class frmTabelaClientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbListaClientes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jbtnRemover = new javax.swing.JButton();
         jbtnNovo = new javax.swing.JButton();
         jbtnSair = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -63,14 +62,6 @@ public class frmTabelaClientes extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jtbListaClientes);
-
-        jbtnRemover.setBackground(new java.awt.Color(255, 102, 102));
-        jbtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/delete/delete-32.png"))); // NOI18N
-        jbtnRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnRemoverActionPerformed(evt);
-            }
-        });
 
         jbtnNovo.setBackground(new java.awt.Color(153, 255, 153));
         jbtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Locadora01/Icons/Add.png"))); // NOI18N
@@ -98,8 +89,6 @@ public class frmTabelaClientes extends javax.swing.JFrame {
                 .addComponent(jbtnSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -107,7 +96,6 @@ public class frmTabelaClientes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -157,7 +145,7 @@ public class frmTabelaClientes extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -170,9 +158,9 @@ public class frmTabelaClientes extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,25 +181,6 @@ public class frmTabelaClientes extends javax.swing.JFrame {
     private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnSairActionPerformed
-
-    private void jbtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverActionPerformed
-        try{
-            
-            int linha = jtbListaClientes.getSelectedRow();
-                ClienteBean cliente = new ClienteBean();
-                
-                
-                Remover.removeRegistroCliente(carregando_lista.get(linha).toString());
-                
-                modelo.removeRow(linha);
-            
-            
-            
-            
-        }catch (Exception ex){
-            JOptionPane.showMessageDialog(null, "Selecione uma linha");
-        }
-    }//GEN-LAST:event_jbtnRemoverActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -251,7 +220,6 @@ public class frmTabelaClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnNovo;
-    private javax.swing.JButton jbtnRemover;
     private javax.swing.JButton jbtnSair;
     private javax.swing.JButton jbtnSearch;
     private javax.swing.JTable jtbListaClientes;

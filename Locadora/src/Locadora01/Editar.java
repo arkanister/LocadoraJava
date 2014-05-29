@@ -121,4 +121,54 @@ public class Editar {
         }
         return ret;
     }
+    
+    public static boolean editRegisterAutor(AutorBean autor_selecionado){
+        AutorBean autor;
+
+        boolean ret = false;
+        ArrayList lista = Leitor.loaderFileAutor();
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            autor = (AutorBean) lista.get(i);
+
+            if (autor_selecionado.getId().equals(autor.getId())) {
+                lista.remove(i);
+
+                autor.setId(autor_selecionado.getId());
+                autor.setNome(autor_selecionado.getNome());
+                
+               
+                lista.add(i, autor);
+                ret = true;
+                ret = Salvar.saveFileAutor(lista);
+            }
+        }
+        return ret;
+    }
+    
+    public static boolean editRegisterDiretor(DiretorBean diretor_selecionado){
+        DiretorBean diretor;
+
+        boolean ret = false;
+        ArrayList lista = Leitor.loaderFileDiretor();
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            diretor = (DiretorBean) lista.get(i);
+
+            if (diretor_selecionado.getId().equals(diretor.getId())) {
+                lista.remove(i);
+
+                diretor.setId(diretor_selecionado.getId());
+                diretor.setNome(diretor_selecionado.getNome());
+                
+               
+                lista.add(i, diretor);
+                ret = true;
+                ret = Salvar.saveFileDiretor(lista);
+            }
+        }
+        return ret;
+    }
 }

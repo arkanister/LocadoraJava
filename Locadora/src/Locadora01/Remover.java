@@ -8,7 +8,7 @@ public class Remover {
         
         ArrayList lista = Leitor.loaderFileFornecedor();
        
-        FornecedorBean fornecedor = new FornecedorBean();
+        FornecedorBean fornecedor;
         
         for (int i = 0; i < lista.size(); i++) {
             fornecedor = (FornecedorBean) lista.get(i);
@@ -27,7 +27,7 @@ public class Remover {
         
         ArrayList lista = Leitor.loaderFileFornecedor();
        
-        ClienteBean cliente = new ClienteBean();
+        ClienteBean cliente;
         
         for (int i = 0; i < lista.size(); i++) {
             cliente = (ClienteBean) lista.get(i);
@@ -46,7 +46,7 @@ public class Remover {
         
         ArrayList lista = Leitor.loaderFileFornecedor();
        
-        MidiaBean midia = new MidiaBean();
+        MidiaBean midia;
         
         for (int i = 0; i < lista.size(); i++) {
             midia = (MidiaBean) lista.get(i);
@@ -55,6 +55,44 @@ public class Remover {
                 lista.remove(i);
                 ret = true;
                 ret = Salvar.saveFileMidia(lista);
+            }
+        }
+        return ret;
+    }
+    
+    public static boolean removeRegistroAutor(String id) {
+        boolean ret = false;
+        
+        ArrayList lista = Leitor.loaderFileAutor();
+       
+        AutorBean autor;
+        
+        for (int i = 0; i < lista.size(); i++) {
+            autor = (AutorBean) lista.get(i);
+            
+            if (id.equals(String.valueOf(autor.getId()))) {
+                lista.remove(i);
+                ret = true;
+                ret = Salvar.saveFileAutor(lista);
+            }
+        }
+        return ret;
+    }
+    
+    public static boolean removeRegistroDiretor(String id) {
+        boolean ret = false;
+        
+        ArrayList lista = Leitor.loaderFileDiretor();
+       
+        DiretorBean diretor;
+        
+        for (int i = 0; i < lista.size(); i++) {
+            diretor = (DiretorBean) lista.get(i);
+            
+            if (id.equals(String.valueOf(diretor.getId()))) {
+                lista.remove(i);
+                ret = true;
+                ret = Salvar.saveFileDiretor(lista);
             }
         }
         return ret;
