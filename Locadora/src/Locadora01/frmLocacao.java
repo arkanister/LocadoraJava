@@ -29,9 +29,10 @@ public class frmLocacao extends javax.swing.JFrame {
         
         for(int i = 1; i < carregar_lista_movimento.size(); i++){
 
-            Object campos[] = {jcbxMidia.getSelectedItem().toString(), carregar_lista_midia.get(i).getTitulo(), carregar_lista_midia.get(i).getGrupo()};
-
-        modelo.addRow(campos);
+            Object campos[] = {jcbxMidia.getSelectedItem().toString(), 
+                                carregar_lista_midia.get(i).getTitulo(), 
+                                carregar_lista_midia.get(i).getGrupo()};
+            modelo.addRow(campos);
         }
     }
 
@@ -265,17 +266,17 @@ public class frmLocacao extends javax.swing.JFrame {
     private void jbtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalvarActionPerformed
         MovimentoBean movimento = new MovimentoBean();
 
-//        for(int i=0; i < modelo.getRowCount(); i++){
-//            movimento.setLocacao_id(String.valueOf(jtbLocacao.getRowCount()));
-//            movimento.setCliente_id(jtxtId.getText());
-//            movimento.setMidia_grupo(String.valueOf(modelo.getValueAt(i, 2)));
-//            movimento.setMidia_titulo(jcbxMidia.getSelectedItem().toString());
-//            movimento.setMidia_valor_locacao(String.valueOf(modelo.getValueAt(i, 1)));
-//            movimento.setData_locacao(jfDataLocacao.getText());
-//            movimento.setValor_total(jlbTotal.getText());
-//            carregar_lista_movimento.add(movimento);
-//            Salvar.saveFileLocacao(carregar_lista_movimento);
-//        }   
+        for(int i=0; i < modelo.getRowCount(); i++){
+            movimento.setLocacao_id(String.valueOf(jtbLocacao.getRowCount()));
+            movimento.setCliente_id(jtxtId.getText());
+            movimento.setMidia_grupo(String.valueOf(modelo.getValueAt(i, 2)));
+            movimento.setMidia_titulo(jcbxMidia.getSelectedItem().toString());
+            movimento.setMidia_valor_locacao(String.valueOf(modelo.getValueAt(i, 1)));
+            movimento.setData_locacao(jfDataLocacao.getText());
+            movimento.setValor_total(jlbTotal.getText());
+            carregar_lista_movimento.add(movimento);
+            Salvar.saveFileLocacao(carregar_lista_movimento);
+        }   
             
         
        

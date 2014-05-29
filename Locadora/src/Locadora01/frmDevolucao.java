@@ -4,51 +4,32 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class frmMovimentacao extends javax.swing.JFrame {
-//    ArrayList<MovimentoBean> carregar_lista_movimento;
-//    
-//    Object titulo[] = {"Código cliente", "Título", "Valor", "Data"};
-//    Object grade[][] = null;
-//    DefaultTableModel modelo = new DefaultTableModel(grade, titulo);
-//    
-//    ArrayList<MidiaBean> carregar_lista_midia;
-//    
-//    public frmMovimentacao() {
-//        initComponents();
-//        setLocationRelativeTo(null);
-//        
-//        this.carregar_lista_midia = Leitor.loaderFileMidia();
-//        
-//        this.carregar_lista_movimento = Leitor.loaderFileMovimento();
-//        jtMovimento.setModel(modelo);
-//        
-//        for(int i=0; i < carregar_lista_midia.size(); i++){
-//            jcbxMidia.addItem(carregar_lista_midia.get(i).getTitulo().toString());
-//        }
-////Tabela        
-//        for(int i = 1; i < carregar_lista_movimento.size(); i++){
-//        Object campos[] = {carregar_lista_movimento.get(i).getId(),
-//                            carregar_lista_movimento.get(i).getCliente_id(),
-//                            carregar_lista_movimento.get(i).getValor_total()};
-//        
-//        modelo.addRow(campos);
-//        }
-//    }
-
+public class frmDevolucao extends javax.swing.JFrame {
+    ArrayList<MovimentoBean> carregar_lista_movimento;
+    
+    Object titulo[] = {"Código cliente", "Título", "Valor", "Data Emprestimo", "Data Devolução"};
+    Object grade[][] = null;
+    DefaultTableModel modelo = new DefaultTableModel(grade, titulo);
+    
+    public frmDevolucao() {
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        this.carregar_lista_movimento = Leitor.loaderFileLocacao();
+        jtMovimento.setModel(modelo);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jcbxEmprestimo = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtxtId = new javax.swing.JTextField();
         jbtnSearch = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jcbxMidia = new javax.swing.JComboBox();
-        jbtnAdicionar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jftxtDataDevolucao = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jtxtValorTotal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -64,10 +45,7 @@ public class frmMovimentacao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Emprestimo"));
-
-        jcbxEmprestimo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Locação", "Devolução" }));
-        jcbxEmprestimo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
@@ -104,35 +82,25 @@ public class frmMovimentacao extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel7.setText("Mídia:");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbxMidia, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+            .addGap(0, 340, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jcbxMidia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 42, Short.MAX_VALUE)
         );
 
-        jbtnAdicionar.setText("Adicionar");
-        jbtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnAdicionarActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Data Devolução:");
+
+        try {
+            jftxtDataDevolucao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jftxtDataDevolucao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,30 +109,34 @@ public class frmMovimentacao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbxEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbtnAdicionar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jftxtDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jcbxEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jftxtDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(49, 49, 49)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
+
+        jtxtValorTotal.setEditable(false);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Valor Total:");
@@ -226,13 +198,13 @@ public class frmMovimentacao extends javax.swing.JFrame {
 
         jtMovimento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Código cliente", "Título", "Valor", "Data Emprestimo"
+                "Código cliente", "Título", "Valor", "Data Emprestimo", "Data Devoluição"
             }
         ));
         jScrollPane1.setViewportView(jtMovimento);
@@ -250,57 +222,32 @@ public class frmMovimentacao extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                        .addComponent(jbtnSalvar))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnSalvar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarActionPerformed
-//        try{
-//            
-//            jtMovimento.setModel(modelo);
-//            Integer id = jtMovimento.getRowCount();
-//    
-//            String nome = jcbxMidia.getSelectedItem().toString();
-//            String valor = "";
-//
-//            for(int i = 0; i < carregar_lista_midia.size(); i++){
-//                valor = carregar_lista_midia.get(i).getValor_locacao();
-//            }
-//
-//            Object campos[] = {id, nome, valor };
-//            modelo.addRow(campos);
-//            double total = 0;
-//
-//            for(int i=0; i < jtMovimento.getRowCount(); i++){
-//                total += Double.valueOf(modelo.getValueAt(i, 2).toString());      
-//            jtxtValorTotal.setText(String.valueOf(total));
-//        }
-//            } catch (Exception ex){
-//                JOptionPane.showMessageDialog(null, "Cadastro Vazio");
-//        }
-    }//GEN-LAST:event_jbtnAdicionarActionPerformed
 
     private void jbtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalvarActionPerformed
 //        JOptionPane.showMessageDialog(null, "Registrado com Sucesso!");
@@ -330,16 +277,27 @@ public class frmMovimentacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnSalvarActionPerformed
 
     private void jbtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchActionPerformed
-//        String id = jtxtId.getText();
-//       
-//        ClienteBean cliente = Leitor.searchFileCliente(id);
-//        try{
-//            if (String.valueOf(cliente.getId()) != null) 
-//                jtxtId.setText(id);
-//                System.out.println(id);
-//        }catch(Exception ex){
-//            JOptionPane.showMessageDialog(null, "Nao encontrado");
-//        }
+        String id = jtxtId.getText();
+       
+        try{
+            for(int j=0; j < carregar_lista_movimento.size(); j++){
+                if (carregar_lista_movimento.get(j).getCliente_id().equals(id)){ 
+                    for(int i=0; i < carregar_lista_movimento.size(); i++){
+                        Object campos[] = {jtxtId.getText(), 
+                                            carregar_lista_movimento.get(i).getMidia_titulo(),  
+                                            carregar_lista_movimento.get(i).getMidia_valor_locacao(),
+                                            carregar_lista_movimento.get(i).getData_locacao(),
+                                            jftxtDataDevolucao.getText()};
+                        modelo.addRow(campos);
+                        jtxtValorTotal.setText(carregar_lista_movimento.get(i).getValor_total());
+                    }
+                    jtxtId.setText(null);             
+                }
+            }
+        }
+        catch(ExceptionInInitializerError ex){
+            JOptionPane.showMessageDialog(null, "Nao encontrado");
+        }
     }//GEN-LAST:event_jbtnSearchActionPerformed
     
     public static void main(String args[]) {
@@ -358,41 +316,39 @@ public class frmMovimentacao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new frmMovimentacao().setVisible(true);
+                new frmDevolucao().setVisible(true);
                 
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtnAdicionar;
     private javax.swing.JButton jbtnSalvar;
     private javax.swing.JButton jbtnSearch;
-    private javax.swing.JComboBox jcbxEmprestimo;
-    private javax.swing.JComboBox jcbxMidia;
+    private javax.swing.JFormattedTextField jftxtDataDevolucao;
     private javax.swing.JTable jtMovimento;
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtValorMulta;

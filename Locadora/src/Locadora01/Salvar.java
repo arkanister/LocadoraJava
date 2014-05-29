@@ -167,8 +167,37 @@ public class Salvar {
         } catch(IOException ex){
             return false;
         }
-        
-       
     }
+        public static boolean  saveFileDevolucao(ArrayList<MovimentoBean> movimentos){
+        File file = new File(LOCAL_DEVOLUCAO);
     
+        try{
+            //Se o arquivo não existir ele vai criar um novo.
+            if(!file.exists()) file.createNewFile();
+            //Instanciando um Gravador e indicando o arquivo que ele vai utilizar.
+            FileWriter fw = new FileWriter(file);
+            
+            for(int i=0; i < movimentos.size(); i++){
+                //Instanciado um novo fornecedor e recebendo a utima posição da lista de fornecedores.
+                
+                MovimentoBean movimento = movimentos.get(i);
+                //Daodos Básico.
+                fw.write(movimento.getCliente_id()+";");
+                fw.write(movimento.getMidia_titulo()+";");
+                fw.write(movimento.getMidia_valor_locacao()+";");
+                fw.write(movimento.getData_locacao()+";");
+                fw.write(movimento.getData_devolucao()+";");
+                fw.write(movimento.getValor_total()+";");
+                fw.write(movimento.getValor_multa()+";");
+                fw.write(movimento.getValor_pago()+";");
+                fw.write(movimento.getValor_saldo()+"\n");
+            }
+        fw.flush();
+        fw.close();
+        return true;
+        
+        } catch(IOException ex){
+            return false;
+        }
+     }
 }

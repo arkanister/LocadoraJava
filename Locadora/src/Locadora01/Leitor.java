@@ -274,6 +274,7 @@ public class Leitor {
                 movimento.setMidia_valor_locacao(st.nextToken());
                 movimento.setData_locacao(st.nextToken());
                 movimento.setValor_total(st.nextToken());
+                
 
                 movimentos.add(movimento);
             }
