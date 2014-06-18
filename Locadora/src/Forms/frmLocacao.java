@@ -49,10 +49,13 @@ public class FrmLocacao extends javax.swing.JFrame {
         jbtnExit = new javax.swing.JButton();
         jbtnSave = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(754, 740));
         setPreferredSize(new java.awt.Dimension(754, 750));
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -330,6 +333,12 @@ public class FrmLocacao extends javax.swing.JFrame {
     private void jtxtIdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtIdMouseClicked
         jtxtId.setText(null);
     }//GEN-LAST:event_jtxtIdMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(JOptionPane.showConfirmDialog(null, "Deseja sair",null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
     
