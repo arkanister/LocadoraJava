@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-public class FrmCadastroMidia extends javax.swing.JFrame {
+public class JFrmMidia extends javax.swing.JFrame {
     ArrayList<MidiaBean> list_midia;
     ArrayList<FornecedorBean> list_fornecedor;
     ArrayList<AutorBean> list_autor;
@@ -19,7 +19,7 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
    
     DefaultTableModel model = new DefaultTableModel(grade, titulo);
    
-    public FrmCadastroMidia() {
+    public JFrmMidia() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -27,13 +27,14 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jptAbas = new javax.swing.JTabbedPane();
+        jTPanel = new javax.swing.JTabbedPane();
         jpListagemMidias = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbMidia = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jbtnEdit = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jpCadastroMidias = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -68,8 +69,10 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jsQuantidade = new javax.swing.JSpinner();
         jbtnExit = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(754, 674));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -100,6 +103,11 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
 
         jbtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/edit-26.png"))); // NOI18N
         jbtnEdit.setText("Edit");
+        jbtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditActionPerformed(evt);
+            }
+        });
 
         jbtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/delete-26.png"))); // NOI18N
         jbtnDelete.setText("Delete");
@@ -109,12 +117,22 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/Add.png"))); // NOI18N
+        jButton1.setText("New");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnDelete)
@@ -124,33 +142,32 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnDelete)
-                    .addComponent(jbtnEdit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jbtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpListagemMidiasLayout = new javax.swing.GroupLayout(jpListagemMidias);
         jpListagemMidias.setLayout(jpListagemMidiasLayout);
         jpListagemMidiasLayout.setHorizontalGroup(
             jpListagemMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListagemMidiasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+            .addGroup(jpListagemMidiasLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpListagemMidiasLayout.setVerticalGroup(
             jpListagemMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpListagemMidiasLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jptAbas.addTab("Listagem de Mídias", jpListagemMidias);
+        jTPanel.addTab("Listagem de Mídias", jpListagemMidias);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -194,42 +211,44 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jcbxGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtxtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbxCensura, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jcbxFornecedor, 0, 201, Short.MAX_VALUE)
-                                .addComponent(jcbxGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbxCensura, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(45, 45, 45)
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(jcbxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jcbxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jcbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jcbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8))
+                                    .addComponent(jLabel10))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jcbxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(44, 44, 44)
+                                    .addComponent(jLabel8)))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jcbxDiretor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(28, 28, 28)
-                                    .addComponent(jLabel10)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jcbxDiretor, 0, 178, Short.MAX_VALUE)
-                                .addComponent(jftData_lancamento))))
-                    .addComponent(jtxtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                                    .addComponent(jftData_lancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))))))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +261,7 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jcbxGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,27 +271,24 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jcbxCensura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jtxtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jcbxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jcbxDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel10)
-                                .addComponent(jftData_lancamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel9)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(jcbxDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jcbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jftData_lancamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -295,7 +311,7 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addContainerGap())
@@ -346,11 +362,15 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                             .addComponent(jftValor_compra)
                             .addComponent(jftValor_locacao, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnUpdate)
+                        .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCadastroMidiasLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCadastroMidiasLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jbtnUpdate)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnSave)))
                 .addContainerGap())
@@ -364,11 +384,6 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCadastroMidiasLayout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
-                        .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbtnSave)
-                            .addComponent(jbtnUpdate)))
-                    .addGroup(jpCadastroMidiasLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -378,11 +393,17 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(jftValor_locacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(21, 21, 21))
+                            .addComponent(jftValor_locacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(299, 299, 299))
+                    .addGroup(jpCadastroMidiasLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnUpdate)
+                            .addComponent(jbtnSave))
+                        .addContainerGap())))
         );
 
-        jptAbas.addTab("Cadastro de Mídia", jpCadastroMidias);
+        jTPanel.addTab("Cadastro de Mídia", jpCadastroMidias);
 
         jbtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/exit-26.png"))); // NOI18N
         jbtnExit.setText("Exit");
@@ -392,27 +413,39 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel14.setText("Cadastro de Mídia");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jptAbas)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTPanel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnExit)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jbtnExit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(241, 241, 241)
+                                .addComponent(jLabel14)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jptAbas)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel14)
                 .addGap(18, 18, 18)
+                .addComponent(jTPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnExit)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -420,41 +453,50 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
         MidiaBean midia = new MidiaBean();
-
-        midia.setId(Integer.valueOf(jtxtId.getText()));
-        StringTokenizer fornecedor_st = new StringTokenizer(jcbxFornecedor.getSelectedItem().toString(), " - ");
-        StringTokenizer autor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
-        StringTokenizer diretor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
-        int fornecedor_id = Integer.valueOf(fornecedor_st.nextToken());
-        int autor_id = Integer.valueOf(autor_st.nextToken());
-        int diretor_id = Integer.valueOf(diretor_st.nextToken());
-        
-        midia.setFornecedor(Read.searchRegisterFornecedor(fornecedor_id));
-        midia.setAutor(Read.searchAutor(autor_id));
-        midia.setDiretor(Read.searchDiretor(diretor_id));
-        midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
-        midia.setGenero(jcbxGenero.getSelectedItem().toString());
-        midia.setCensura(jcbxCensura.getSelectedItem().toString());
-        midia.setTitulo(jtxtTitulo.getText());
-        midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
-        midia.setData_lancamento(jftData_lancamento.getText());
-        midia.setSinopse(jtxtSinopse.getText());
-        midia.setValor_custo(jftValor_compra.getText());
-        midia.setValor_locacao(jftValor_locacao.getText());
-        midia.setQuantidade(Integer.parseInt(jsQuantidade.getValue().toString()));
-        
-        Object campo[] = {
-                    midia.getId(),
-                    midia.getTitulo(),
-                    midia.getValor_custo(),
-                    midia.getValor_locacao(),
-                    midia.getQuantidade()};
-        model.addRow(campo);
-        list_midia.add(midia);
-
-        Save.createFileMidia(list_midia);
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+        try{
+            while(jtbMidia.getSelectedRow() >=0){
+                if(jtbMidia.getSelectedRow() >=0){
+                    JOptionPane.showMessageDialog(null, "Este registro já existe");
+                    clear();
+                    jtxtId.requestFocus();
+                }
+                else
+                    midia.setId(Integer.valueOf(jtxtId.getText()));
+                    StringTokenizer fornecedor_st = new StringTokenizer(jcbxFornecedor.getSelectedItem().toString(), " - ");
+                    StringTokenizer autor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
+                    StringTokenizer diretor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
+                    int fornecedor_id = Integer.valueOf(fornecedor_st.nextToken());
+                    int autor_id = Integer.valueOf(autor_st.nextToken());
+                    int diretor_id = Integer.valueOf(diretor_st.nextToken());
+                    midia.setFornecedor(Read.searchRegisterFornecedor(fornecedor_id));
+                    midia.setAutor(Read.searchAutor(autor_id));
+                    midia.setDiretor(Read.searchDiretor(diretor_id));
+                    midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
+                    midia.setGenero(jcbxGenero.getSelectedItem().toString());
+                    midia.setCensura(jcbxCensura.getSelectedItem().toString());
+                    midia.setTitulo(jtxtTitulo.getText());
+                    midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
+                    midia.setData_lancamento(jftData_lancamento.getText());
+                    midia.setSinopse(jtxtSinopse.getText());
+                    midia.setValor_custo(jftValor_compra.getText());
+                    midia.setValor_locacao(jftValor_locacao.getText());
+                    midia.setQuantidade(Integer.parseInt(jsQuantidade.getValue().toString()));
+                    Object campo[] = {
+                        midia.getId(),
+                        midia.getTitulo(),
+                        midia.getValor_custo(),
+                        midia.getValor_locacao(),
+                        midia.getQuantidade()};
+                    model.addRow(campo);
+                    list_midia.add(midia);
+                    Save.createFileMidia(list_midia);
+                    JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            }
+        }catch(Exception ex){
+            ex.getMessage();
+        }
         clear();
+        jtxtId.requestFocus();
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
@@ -492,8 +534,10 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
                     midia.getQuantidade()};
                 model.insertRow(jtbMidia.getSelectedRow(), campo);
                 model.removeRow(jtbMidia.getSelectedRow()+1);
-                
                 clear();
+                jTPanel.setSelectedComponent(jPanel1);
+                jTPanel.setEnabledAt(1, false);
+                jbtnUpdate.setEnabled(false);
             }
         }
         
@@ -512,17 +556,19 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jtbMidia.setModel(model);
+        
         this.list_midia = Read.readerFileMidia();
         this.list_fornecedor = Read.readerFileFornecedor();
         this.list_autor = Read.readerFileAutor();
         this.list_diretor = Read.readerFileDiretor();
 
         for(MidiaBean midia: list_midia){
-            Object campo[] = {midia.getId(), 
-                                midia.getTitulo(),
-                                midia.getValor_custo(), 
-                                midia.getValor_locacao(), 
-                                midia.getQuantidade()};
+            Object campo[] = {
+                midia.getId(), 
+                midia.getTitulo(),
+                midia.getValor_custo(), 
+                midia.getValor_locacao(), 
+                midia.getQuantidade()};
             model.addRow(campo);
         }
 
@@ -543,6 +589,7 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
             jcbxFornecedor.addItem(fornecedor.getId() + " - " +
                                    fornecedor.getRazao_social());
         }
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void jtbMidiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMidiaMouseClicked
@@ -580,40 +627,24 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroMidia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
+        if(jtbMidia.getSelectedRow() >= 0){
+            jTPanel.setEnabledAt(1, true);
+            jTPanel.setSelectedComponent(jPanel2);
+            jbtnUpdate.setEnabled(true);
+            jbtnSave.setEnabled(false);
         }
-        //</editor-fold>
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        else
+         JOptionPane.showMessageDialog(null, "Selecione um cliente");   
+    }//GEN-LAST:event_jbtnEditActionPerformed
 
-            public void run() {
-                try{
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
-                }catch(Exception ex){}
-                new FrmCadastroMidia().setVisible(true);
-            }
-        });
-    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTPanel.setEnabledAt(1, true);
+        jTPanel.setSelectedComponent(jPanel2);
+        jbtnUpdate.setEnabled(false);
+        jbtnSave.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void clear(){
         jtxtId.setText(null);
         jtxtTitulo.setText(null);
@@ -625,11 +656,13 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -643,6 +676,7 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTPanel;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnEdit;
     private javax.swing.JButton jbtnExit;
@@ -660,7 +694,6 @@ public class FrmCadastroMidia extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jftValor_locacao;
     private javax.swing.JPanel jpCadastroMidias;
     private javax.swing.JPanel jpListagemMidias;
-    private javax.swing.JTabbedPane jptAbas;
     private javax.swing.JSpinner jsQuantidade;
     private javax.swing.JTable jtbMidia;
     private javax.swing.JTextField jtxtId;

@@ -1,24 +1,18 @@
 package Forms;
 
 import Controlers.*;
-
 import Model.ClienteBean;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-public class FrmCadastroCliente extends javax.swing.JFrame {
+public class JFrmCliente extends javax.swing.JFrame {
     ArrayList<ClienteBean> list_cliente;
+    boolean is_update = false;
+    int selected_index = -1;
+    DefaultTableModel model;
     
-    Object titulo[] = {"Código", "Cpf", "Nome", "Celular", "Situação"};
-    Object grade[][] = null;
-    
-    DefaultTableModel model = new DefaultTableModel(grade, titulo);
-    
-    
-    
-    public FrmCadastroCliente() {
+    public JFrmCliente() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -29,13 +23,14 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
 
         rbGroupSituacao = new javax.swing.ButtonGroup();
         jrvGroupSexo = new javax.swing.ButtonGroup();
-        jtbListCliente = new javax.swing.JTabbedPane();
+        jTPanel = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbCliente = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jbtnDelete = new javax.swing.JButton();
         jbtnEdit = new javax.swing.JButton();
+        jbtnNew = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -77,9 +72,8 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jrbInativo = new javax.swing.JRadioButton();
         jPanel9 = new javax.swing.JPanel();
         jbtnSave = new javax.swing.JButton();
-        jbtnUpdate = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jbtnExit = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -119,11 +113,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbClienteMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtbCliente);
 
         jbtnDelete.setBackground(new java.awt.Color(255, 102, 102));
@@ -144,21 +133,37 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        jbtnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/Add.png"))); // NOI18N
+        jbtnNew.setText("New");
+        jbtnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnNewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(542, Short.MAX_VALUE)
-                .addComponent(jbtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnDelete)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jbtnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-            .addComponent(jbtnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jbtnNew, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -166,20 +171,21 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jtbListCliente.addTab("Lista de Clientes", jPanel1);
+        jTPanel.addTab("Lista de Clientes", jPanel1);
 
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.setEnabled(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(775, 600));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
@@ -198,6 +204,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jrbFemenino.setText("Femenino");
 
         jrvGroupSexo.add(jrbMasculino);
+        jrbMasculino.setSelected(true);
         jrbMasculino.setText("Masculino");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -373,7 +380,7 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                         .addGap(123, 123, 123))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jftxCep, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,31 +492,21 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        jbtnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/available_updates-26.png"))); // NOI18N
-        jbtnUpdate.setText("Update");
-        jbtnUpdate.setPreferredSize(new java.awt.Dimension(93, 35));
-        jbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnUpdateActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -553,16 +550,16 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                     .addComponent(jrbInativo)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jtbListCliente.addTab("Dados do Cliente", null, jPanel2, "");
+        jTPanel.addTab("Dados do Cliente", null, jPanel2, "");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/exit-26.png"))); // NOI18N
-        jButton4.setText("Exit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/exit-26.png"))); // NOI18N
+        jbtnExit.setText("Exit");
+        jbtnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtnExitActionPerformed(evt);
             }
         });
 
@@ -578,13 +575,13 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton4))
+                        .addComponent(jbtnExit))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(257, 257, 257)
                         .addComponent(jLabel14))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jtbListCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -593,9 +590,9 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jtbListCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jbtnExit)
                 .addContainerGap())
         );
 
@@ -603,230 +600,120 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        ClienteBean cliente = new ClienteBean();
-        String sexo = "";
-        String situacao = "";
-        String cpf = jftxCpf.getText();
-        String msg = "";
-        //Validando o campo sexo
-        if(jrbMasculino.isSelected()){
-            sexo = "Masculino";}
-        else if (jrbFemenino.isSelected()){
-            sexo = "Femenino";}
-        //Validando a situação
-        if(jrbAtivo.isSelected()){
-            situacao = "Ativo";}
-        else if (jrbInativo.isSelected()){
-            situacao = "Inativo";}
-        try{
-            cliente.setId(Integer.valueOf(jtxtId.getText()));
-            cliente.setCpf(cpf);   
-            cliente.setRg(jftxRg.getText());    
-            cliente.setNome(jtxtNome.getText());
-            cliente.setData_aniversario(jftNascimento.getText());   
-            cliente.setSexo(sexo);    
-            cliente.setCep(jftxCep.getText());
-            cliente.setLogradouro(jtxtLogradouro.getText());
-            cliente.setNumero_logradouro(jtxtNumero_logradouro.getText());
-            cliente.setBairro(jtxtBairro.getText());
-            cliente.setMunicipio(jcbxMunicipio.getSelectedItem().toString());
-            cliente.setUf(jcbxUf.getSelectedItem().toString());
-            cliente.setPais(jcbxtPais.getSelectedItem().toString());
-            cliente.setNumero_residencial(jftxTelefone.getText());
-            cliente.setNumero_celular(jftxCelular.getText());
-            cliente.setEmail(jtxtEmail.getText());
-            cliente.setSituacao(situacao);
-            list_cliente.add(cliente);
-            Save.createFileCliente(list_cliente);
-            Object campo[] = {  
-                cliente.getId(),
-                cliente.getCpf(),
-                cliente.getNome(),
-                cliente.getNumero_celular(),
-                situacao
-            };
-            model.addRow(campo);
-            JOptionPane.showMessageDialog(this, "Salvo com sucesso");
-        }catch(Exception ex){
-            System.out.println("Erro na gravação");
-            System.out.println(ex.getMessage());
-        }
-        clear();
-    }//GEN-LAST:event_jbtnSaveActionPerformed
+        ClienteBean cliente = (is_update ? list_cliente.get(selected_index) : new ClienteBean());
+        String msg = (is_update ? "Registro Alterado com sucesso!" : "Salvo com sucesso");
 
-    private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
-        int id = Integer.valueOf(jtxtId.getText());
-        String sexo = "";
-        String situacao = "";
-        if(jrbMasculino.isSelected()){
-            sexo = "Masculino";}
-        else if (jrbFemenino.isSelected()){
-            sexo = "Femenino";}
-        if(jrbAtivo.isSelected()){
-            situacao = "Ativo";}
-        else if (jrbInativo.isSelected()){
-            situacao = "Inativo";}
+        cliente.setId(Integer.valueOf(jtxtId.getText()));
+        cliente.setCpf(jftxCpf.getText());
+        cliente.setRg(jftxRg.getText());
+        cliente.setNome(jtxtNome.getText());
+        cliente.setData_aniversario(jftNascimento.getText());
+        cliente.setSexo((jrbMasculino.isSelected() ? "Masculino" : "Feminino"));
+        cliente.setCep(jftxCep.getText());
+        cliente.setLogradouro(jtxtLogradouro.getText());
+        cliente.setNumero_logradouro(jtxtNumero_logradouro.getText());
+        cliente.setBairro(jtxtBairro.getText());
+        cliente.setMunicipio(jcbxMunicipio.getSelectedItem().toString());
+        cliente.setUf(jcbxUf.getSelectedItem().toString());
+        cliente.setPais(jcbxtPais.getSelectedItem().toString());
+        cliente.setNumero_residencial(jftxTelefone.getText());
+        cliente.setNumero_celular(jftxCelular.getText());
+        cliente.setEmail(jtxtEmail.getText());
+        cliente.setSituacao((jrbAtivo.isSelected() ? "Ativo" : "Inativo"));
+
+        if (is_update)
+            list_cliente.set(selected_index, cliente);
+        else
+            list_cliente.add(cliente);
+        
         try {
-            for (ClienteBean cliente : list_cliente) {
-                if(Integer.valueOf(jtxtId.getText()) == cliente.getId()){
-                    cliente.setId(id);
-                    cliente.setCpf(jftxCpf.getText());
-                    cliente.setRg(jftxRg.getText());
-                    cliente.setNome(jtxtNome.getText());
-                    cliente.setData_aniversario(jftNascimento.getText());
-                    cliente.setSexo(sexo);
-                    cliente.setCep(jftxCep.getText());
-                    cliente.setLogradouro(jtxtLogradouro.getText());
-                    cliente.setNumero_logradouro(jtxtNumero_logradouro.getText());
-                    cliente.setBairro(jtxtBairro.getText());
-                    cliente.setMunicipio(jcbxMunicipio.getSelectedItem().toString());
-                    cliente.setUf(jcbxUf.getSelectedItem().toString());
-                    cliente.setPais(jcbxtPais.getSelectedItem().toString());
-                    cliente.setNumero_residencial(jftxTelefone.getText());
-                    cliente.setNumero_celular(jftxCelular.getText());
-                    cliente.setEmail(jtxtEmail.getText());
-                    cliente.setSituacao(situacao);
-                    Save.createFileCliente(list_cliente);
-                    
-                    Object campo[] = {
-                        cliente.getId(),
-                        cliente.getCpf(),
-                        cliente.getNome(), 
-                        cliente.getNumero_celular(), 
-                        situacao};
-                    model.insertRow(jtbCliente.getSelectedRow(), campo);
-                    model.removeRow(jtbCliente.getSelectedRow()+1);
-                }
-            } 
-            JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
-        }
-        catch(Exception ex){
+            Save.createFileCliente(list_cliente);   
+            jTPanel.setSelectedComponent(jPanel1);
+            jTPanel.setEnabledAt(1, false);
+            load_table();
+            clear();
+            JOptionPane.showMessageDialog(this, msg); 
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Campos Errados no cadastro"); 
         }
-        clear();
-    }//GEN-LAST:event_jbtnUpdateActionPerformed
+    }//GEN-LAST:event_jbtnSaveActionPerformed
 
-    private void jtbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbClienteMouseClicked
-        String sexo = "";
-        String situacao = "";
-        
-        for(int i=0; i < list_cliente.size(); i++){
-            //Validando a situação
-            if(jrbAtivo.isSelected()){
-            situacao = "Ativo";}
-            else if (jrbInativo.isSelected()){
-            situacao = "Inativo";}
-            if(jtbCliente.getValueAt(i, 0).equals(list_cliente.get(i).getId())){
-                if(jtbCliente.isRowSelected(i)){
-                    jtxtId.setText(String.valueOf(jtbCliente.getValueAt(i, 0)));
-                    jftxCpf.setText(list_cliente.get(i).getCpf());
-                    jftxRg.setText(list_cliente.get(i).getRg());
-                    jtxtNome.setText(list_cliente.get(i).getNome());
-                    jftNascimento.setText(list_cliente.get(i).getData_aniversario());
-                    if(list_cliente.get(i).getSexo().equals("Masculino")){
-                        jrbMasculino.setSelected(true);
-                    }
-                    else {
-                        jrbFemenino.setSelected(true);}
-                    jftxCep.setText(list_cliente.get(i).getCep());
-                    jtxtLogradouro.setText(list_cliente.get(i).getLogradouro());
-                    jtxtNumero_logradouro.setText(list_cliente.get(i).getNumero_logradouro());
-                    jtxtBairro.setText(list_cliente.get(i).getBairro());
-                    jcbxMunicipio.setSelectedItem(list_cliente.get(i).getMunicipio());
-                    jcbxUf.setSelectedItem(list_cliente.get(i).getUf());
-                    jcbxtPais.setSelectedItem(list_cliente.get(i).getPais());
-                    jftxTelefone.setText(list_cliente.get(i).getNumero_residencial());
-                    jftxCelular.setText(list_cliente.get(i).getNumero_celular());
-                    jtxtEmail.setText(list_cliente.get(i).getEmail());
-                    if(list_cliente.get(i).getSituacao().equals("Ativo")){
-                        jrbAtivo.setSelected(true);
-                    }
-                    else {
-                        jrbInativo.setSelected(true);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_jtbClienteMouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbtnExitActionPerformed
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
-        int id = Integer.valueOf(jtxtId.getText());
-        for (ClienteBean cliente : list_cliente) {
-            if(cliente.getId() == id){
-                model.removeRow(jtbCliente.getSelectedRow());
-                Delete.removeRegisterCliente(id);
-                JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+        selected_index = jtbCliente.getSelectedRow();
+        if (selected_index != -1) {
+            if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o cliente?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                try {
+                    list_cliente.remove(selected_index);
+                    Save.createFileCliente(list_cliente);
+                    JOptionPane.showMessageDialog(this, "Removido com sucesso!");
+                    load_table();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Erro ao deletar");
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente!");
         }
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
+        selected_index = jtbCliente.getSelectedRow();
 
+        if (selected_index != -1) {
+            ClienteBean cliente = list_cliente.get(selected_index);
+
+            jtxtId.setText(String.valueOf(cliente.getId()));
+            jftxCpf.setText(cliente.getCpf());
+            jftxRg.setText(cliente.getRg());
+            jtxtNome.setText(cliente.getNome());
+            jftNascimento.setText(cliente.getData_aniversario());
+            jrbMasculino.setSelected(cliente.getSexo().equals("Masculino"));
+            jrbFemenino.setSelected(cliente.getSexo().equals("Feminino"));
+            jftxCep.setText(cliente.getCep());
+            jtxtLogradouro.setText(cliente.getLogradouro());
+            jtxtNumero_logradouro.setText(cliente.getNumero_logradouro());
+            jtxtBairro.setText(cliente.getBairro());
+            jcbxMunicipio.setSelectedItem(cliente.getMunicipio());
+            jcbxUf.setSelectedItem(cliente.getUf());
+            jcbxtPais.setSelectedItem(cliente.getPais());
+            jftxTelefone.setText(cliente.getNumero_residencial());
+            jftxCelular.setText(cliente.getNumero_celular());
+            jtxtEmail.setText(cliente.getEmail());
+            jrbAtivo.setSelected(cliente.getSituacao().equals("Ativo"));
+            jrbInativo.setSelected(cliente.getSituacao().equals("Inativo"));
+            
+            jTPanel.setEnabledAt(1, true);
+            jTPanel.setSelectedComponent(jPanel2);
+            jbtnSave.setEnabled(true);
+            is_update = true;
+        }
+        else
+         JOptionPane.showMessageDialog(null, "Selecione um cliente");   
     }//GEN-LAST:event_jbtnEditActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        jtbCliente.setModel(model);
-        this.list_cliente = Read.readerFileCliente();
-
-        for(ClienteBean _cliente: list_cliente){
-            Object campo[] = {_cliente.getId(), 
-                            _cliente.getCpf(),
-                            _cliente.getNome(), 
-                            _cliente.getNumero_celular(), 
-                            _cliente.getSituacao()};
-        model.addRow(campo);
-        }
+        load_table();
+        jTPanel.setEnabledAt(1, false);
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    if(JOptionPane.showConfirmDialog(null, "Deseja sair",null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if(JOptionPane.showConfirmDialog(null, "Deseja sair",null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             dispose();
         }
     }//GEN-LAST:event_formWindowClosing
-   
-    public static void main(String args[]) {
-       
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void jbtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNewActionPerformed
+        jTPanel.setEnabledAt(1, true);
+        jTPanel.setSelectedComponent(jPanel2);
+    }//GEN-LAST:event_jbtnNewActionPerformed
 
-            public void run() {
-                try{
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
-                }catch(Exception ex){}
-                new FrmCadastroCliente().setVisible(true);
-            }
-        });
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -853,10 +740,12 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTPanel;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnEdit;
+    private javax.swing.JButton jbtnExit;
+    private javax.swing.JButton jbtnNew;
     private javax.swing.JButton jbtnSave;
-    private javax.swing.JButton jbtnUpdate;
     private javax.swing.JComboBox jcbxMunicipio;
     private javax.swing.JComboBox jcbxUf;
     private javax.swing.JComboBox jcbxtPais;
@@ -872,7 +761,6 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbMasculino;
     private javax.swing.ButtonGroup jrvGroupSexo;
     private javax.swing.JTable jtbCliente;
-    private javax.swing.JTabbedPane jtbListCliente;
     private javax.swing.JTextField jtxtBairro;
     private javax.swing.JTextField jtxtEmail;
     private javax.swing.JTextField jtxtId;
@@ -902,5 +790,24 @@ public class FrmCadastroCliente extends javax.swing.JFrame {
         jtxtEmail.setText(null);
         jrbAtivo.setSelected(true);
         jrbInativo.setSelected(false);
+        is_update = false;
+        selected_index = -1;
+    }
+    
+    private void load_table() {
+        Object titulo[] = {"Código", "Cpf", "Nome", "Celular", "Situação"};
+        Object grade[][] = null;
+        model = new DefaultTableModel(grade, titulo);
+        jtbCliente.setModel(model);
+        this.list_cliente = Read.readerFileCliente();
+
+        for(ClienteBean _cliente: list_cliente){
+            Object campo[] = {_cliente.getId(), 
+                            _cliente.getCpf(),
+                            _cliente.getNome(), 
+                            _cliente.getNumero_celular(), 
+                            _cliente.getSituacao()};
+            model.addRow(campo);
+        }
     }
 }

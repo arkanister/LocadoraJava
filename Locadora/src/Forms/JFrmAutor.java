@@ -8,14 +8,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-public class FrmAutor extends javax.swing.JFrame {
+public class JFrmAutor extends javax.swing.JFrame {
     ArrayList<AutorBean> lista_autores;
-    Object titulo[] = {"Código", "Nome"};
-    Object grade[][] = null;
+    int selected_index = -1;
+    boolean is_update = false;
+    DefaultTableModel model;
     
-    DefaultTableModel model = new DefaultTableModel(grade, titulo);
-    
-    public FrmAutor() {
+    public JFrmAutor() {
         initComponents();
         setLocationRelativeTo(null);   
     }
@@ -31,7 +30,6 @@ public class FrmAutor extends javax.swing.JFrame {
         jtxtNome = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jbtnDelete = new javax.swing.JButton();
-        jbtnUpdate = new javax.swing.JButton();
         jbtnSave = new javax.swing.JButton();
         jbtnExit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -99,14 +97,6 @@ public class FrmAutor extends javax.swing.JFrame {
             }
         });
 
-        jbtnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/edit-26.png"))); // NOI18N
-        jbtnUpdate.setText("Update");
-        jbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnUpdateActionPerformed(evt);
-            }
-        });
-
         jbtnSave.setBackground(new java.awt.Color(204, 255, 204));
         jbtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/save-26.png"))); // NOI18N
         jbtnSave.setText("Save");
@@ -132,8 +122,6 @@ public class FrmAutor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jbtnExit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnDelete)
@@ -146,7 +134,6 @@ public class FrmAutor extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jbtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbtnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                         .addComponent(jbtnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                         .addComponent(jbtnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -226,72 +213,54 @@ public class FrmAutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
-        try{
-            int id = Integer.valueOf(jtxtId.getText());
-            for (AutorBean autor : lista_autores) {
-                 if(autor.getId() == id){
-                    model.removeRow(jtbLista.getSelectedRow());
-                    Delete.removeRegisterAutor(id);
+        selected_index = jtbLista.getSelectedRow();
+        if (selected_index != -1) {
+            if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o autor?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                lista_autores.remove(selected_index);
+
+                try {
+                    Save.createFileAutor(lista_autores);
+                    load_table();
                     clear();
+                    JOptionPane.showMessageDialog(null, "Registro excluido com sucesso!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir este registro!");
                 }
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Erro ao excluir este registro!");
         }
-        clear();
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        AutorBean autor = new AutorBean();
-
-        try{
-            autor.setId(Integer.valueOf(jtxtId.getText()));
-            autor.setNome(jtxtNome.getText());
-            
-            jtbLista.setModel(model);
+        AutorBean autor = (is_update ? lista_autores.get(selected_index) : new AutorBean());
+        String msg = (is_update ? "Registro alterado com sucesso" : "Salvo com sucesso");
+        
+        autor.setId(Integer.valueOf(jtxtId.getText()));
+        autor.setNome(jtxtNome.getText());
+        
+        if(is_update)
+            lista_autores.set(selected_index, autor);
+        else
             lista_autores.add(autor);
-
-            Object campos[] = {jtxtId.getText(),jtxtNome.getText()};
-            model.addRow(campos);
+        
+        try{
             Save.createFileAutor(lista_autores);
-
-            System.out.println("Salvo com sucesso");
+            clear();
+            load_table();
+            JOptionPane.showMessageDialog(this, msg);
         }
-
         catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Não foi possível gravar este registro!");
         }
-        clear();
-    }//GEN-LAST:event_jbtnSaveActionPerformed
-
-    private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
-        int id = Integer.valueOf(jtxtId.getText());
-        String nome = jtxtNome.getText();
         
-        for (AutorBean autor : lista_autores) {
-            if(autor.getId() == id){
-                autor.setId(id);
-                autor.setNome(nome);
-                Save.createFileAutor(lista_autores);
-                JOptionPane.showMessageDialog(null, "Save register sucess");
-                
-                Object campo[] = {autor.getId(), autor.getNome()};
-                model.insertRow(jtbLista.getSelectedRow(), campo);
-                model.removeRow(jtbLista.getSelectedRow()+1);
-                jtbLista.setModel(model);
-                clear();
-            }
-        }
-    }//GEN-LAST:event_jbtnUpdateActionPerformed
+    }//GEN-LAST:event_jbtnSaveActionPerformed
          
     private void jtbListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbListaMouseClicked
-        for(int i=0; i < lista_autores.size(); i++){
-            if(jtbLista.isRowSelected(i))
-            jtxtId.setText(String.valueOf(model.getValueAt(i, 0)));
-
-            if(jtbLista.isRowSelected(i))                    
-            jtxtNome.setText(String.valueOf(model.getValueAt(i, 1)));
-
+        selected_index = jtbLista.getSelectedRow();
+        if(selected_index != -1) {
+            is_update = true;
+            AutorBean autor = lista_autores.get(selected_index);
+            jtxtId.setText(String.valueOf(autor.getId()));
+            jtxtNome.setText(autor.getNome());
         }
     }//GEN-LAST:event_jtbListaMouseClicked
 
@@ -300,13 +269,7 @@ public class FrmAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnExitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        jtbLista.setModel(model);
-        this.lista_autores = Read.readerFileAutor();
-        
-        for(AutorBean _autores: lista_autores){
-            Object campos[] = {_autores.getId(), _autores.getNome()};
-            model.addRow(campos);
-        }
+        load_table();
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -315,40 +278,7 @@ public class FrmAutor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                try{
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
-                }catch(Exception ex){}
-                new FrmAutor().setVisible(true);
-            }
-        });
-    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -360,25 +290,29 @@ public class FrmAutor extends javax.swing.JFrame {
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnExit;
     private javax.swing.JButton jbtnSave;
-    private javax.swing.JButton jbtnUpdate;
     private javax.swing.JTable jtbLista;
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtNome;
     // End of variables declaration//GEN-END:variables
 
-private void clear(){
-    jtxtId.setText(null);
-    jtxtNome.setText(null);
+    private void clear(){
+        jtxtId.setText(null);
+        jtxtNome.setText(null);
+        is_update = false;
+        selected_index = -1;
     }
 
-//private void id_icrement(){
-//        AutorBean autor = new AutorBean();  
-//        int id =1;
-//           for(int i=1; i < lista_autores.size(); i++){
-//                id += i;
-//                autor.setId(String.valueOf(id));
-//            }
-//            jtxtId.setText(String.valueOf(id));
-//            System.out.println(id);
-//    }
+    private void load_table(){
+        Object titulo[] = {"Código", "Nome"};
+        Object grade[][] = null;
+        model = new DefaultTableModel(grade, titulo);
+        jtbLista.setModel(model);
+        this.lista_autores = Read.readerFileAutor();
+
+        for(AutorBean _autores: lista_autores){
+            Object campos[] = {_autores.getId(), _autores.getNome()};
+            model.addRow(campos);
+        }
+    }
+
 }

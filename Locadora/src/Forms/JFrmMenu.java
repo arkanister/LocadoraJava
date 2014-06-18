@@ -1,10 +1,11 @@
 package Forms;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
-public class FrmMenu extends javax.swing.JFrame {
+public class JFrmMenu extends javax.swing.JFrame {
 
-    public FrmMenu() {
+    public JFrmMenu() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH); 
     }
@@ -126,37 +127,37 @@ public class FrmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAutorActionPerformed
-        FrmAutor dialog = new FrmAutor();
+        JFrmAutor dialog = new JFrmAutor();
         dialog.setVisible(true);
     }//GEN-LAST:event_jAutorActionPerformed
 
     private void jClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jClienteActionPerformed
-        FrmCadastroCliente dialog = new FrmCadastroCliente();
+        JFrmCliente dialog = new JFrmCliente();
         dialog.setVisible(true);
     }//GEN-LAST:event_jClienteActionPerformed
 
     private void jDiretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDiretorActionPerformed
-        FrmCadastroDiretor dialog = new FrmCadastroDiretor();
+        JFrmDiretor dialog = new JFrmDiretor();
         dialog.setVisible(true);
     }//GEN-LAST:event_jDiretorActionPerformed
 
     private void jFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFornecedorActionPerformed
-        FrmCadastroFornecedor dialog = new FrmCadastroFornecedor();
+        JFrmFornecedor dialog = new JFrmFornecedor();
         dialog.setVisible(true);
     }//GEN-LAST:event_jFornecedorActionPerformed
 
     private void jMidiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMidiaActionPerformed
-        FrmCadastroMidia dialog = new FrmCadastroMidia();
+        JFrmMidia dialog = new JFrmMidia();
         dialog.setVisible(true);
     }//GEN-LAST:event_jMidiaActionPerformed
 
     private void jDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDevolucaoActionPerformed
-        FrmDevolucao dialog = new FrmDevolucao();
+        JFrmDevolucao dialog = new JFrmDevolucao();
         dialog.setVisible(true);
     }//GEN-LAST:event_jDevolucaoActionPerformed
 
     private void jLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLocacaoActionPerformed
-        FrmLocacao dialog = new FrmLocacao();
+        JFrmLocacao dialog = new JFrmLocacao();
         dialog.setVisible(true);
     }//GEN-LAST:event_jLocacaoActionPerformed
 
@@ -186,19 +187,22 @@ public class FrmMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new FrmMenu().setVisible(true);
+                try{
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
+                }catch(Exception ex){}
+                new JFrmMenu().setVisible(true);
             }
         });
     }
