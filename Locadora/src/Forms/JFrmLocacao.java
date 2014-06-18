@@ -302,11 +302,26 @@ public class JFrmLocacao extends javax.swing.JFrame {
         
         locacao.setId(last_id + 1);
         locacao.setData_locacao(jftData_locacao.getText());
-
+       
         locacoes.add(locacao);
-        Save.createFileLocacao(locacoes);
-        System.out.println("Salvo");
-  
+        try {
+            Save.createFileLocacao(locacoes);
+            
+            jtxtId.setText(null);
+            jtxtId.requestFocus();
+            locacao = new LocacaoBean();
+            
+            jtxtValor_total.setText(null);
+            
+            Object titulo[] = {"Mídia", "Valor", "Tipo"};
+            Object grade[][] = null;
+            model = new DefaultTableModel(grade, titulo);
+            jtbLocacao.setModel(model);
+            JOptionPane.showMessageDialog(this, "Efetuada a Locação");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao efetuar locação");
+        }
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
     private void jbtnSearchClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchClienteActionPerformed

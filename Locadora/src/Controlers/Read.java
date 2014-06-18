@@ -68,7 +68,8 @@ public class Read {
     public static LocacaoBean searchLocacao(int id){
         ArrayList<LocacaoBean> locacoes = readerFileLocacao();
         for (LocacaoBean locacao : locacoes) {
-            return locacao;
+            if (locacao.getId() == id)
+                return locacao;
         }
         return null;
     }

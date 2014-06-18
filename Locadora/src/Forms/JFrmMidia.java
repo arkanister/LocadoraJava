@@ -13,11 +13,9 @@ public class JFrmMidia extends javax.swing.JFrame {
     ArrayList<FornecedorBean> list_fornecedor;
     ArrayList<AutorBean> list_autor;
     ArrayList<DiretorBean> list_diretor;
-    
-    Object titulo[] = {"Código", "Título", "Valor Compra", "Valor Locação", "Quantidade"};
-    Object grade[][] = null;
-   
-    DefaultTableModel model = new DefaultTableModel(grade, titulo);
+    DefaultTableModel model;
+    int selected_index = -1;
+    boolean is_update = false;
    
     public JFrmMidia() {
         initComponents();
@@ -34,7 +32,7 @@ public class JFrmMidia extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jbtnEdit = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbtnNew = new javax.swing.JButton();
         jpCadastroMidias = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -65,7 +63,6 @@ public class JFrmMidia extends javax.swing.JFrame {
         jftValor_compra = new javax.swing.JFormattedTextField();
         jftValor_locacao = new javax.swing.JFormattedTextField();
         jbtnSave = new javax.swing.JButton();
-        jbtnUpdate = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jsQuantidade = new javax.swing.JSpinner();
         jbtnExit = new javax.swing.JButton();
@@ -117,11 +114,11 @@ public class JFrmMidia extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/Add.png"))); // NOI18N
-        jButton1.setText("New");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/Add.png"))); // NOI18N
+        jbtnNew.setText("New");
+        jbtnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtnNewActionPerformed(evt);
             }
         });
 
@@ -131,7 +128,7 @@ public class JFrmMidia extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jbtnNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -143,7 +140,7 @@ public class JFrmMidia extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jbtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jbtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -202,6 +199,12 @@ public class JFrmMidia extends javax.swing.JFrame {
         jcbxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Catalogo", "Lançamento" }));
 
         jLabel10.setText("Lançamento:");
+
+        try {
+            jftData_lancamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -321,6 +324,10 @@ public class JFrmMidia extends javax.swing.JFrame {
 
         jLabel12.setText("Valor de locação:");
 
+        jftValor_compra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+
+        jftValor_locacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+
         jbtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/save-26.png"))); // NOI18N
         jbtnSave.setText("Save");
         jbtnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -329,17 +336,9 @@ public class JFrmMidia extends javax.swing.JFrame {
             }
         });
 
-        jbtnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/available_updates-26.png"))); // NOI18N
-        jbtnUpdate.setText("Update");
-        jbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnUpdateActionPerformed(evt);
-            }
-        });
-
         jLabel13.setText("Qtd:");
 
-        jsQuantidade.setModel(new javax.swing.SpinnerNumberModel());
+        jsQuantidade.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         javax.swing.GroupLayout jpCadastroMidiasLayout = new javax.swing.GroupLayout(jpCadastroMidias);
         jpCadastroMidias.setLayout(jpCadastroMidiasLayout);
@@ -362,16 +361,10 @@ public class JFrmMidia extends javax.swing.JFrame {
                             .addComponent(jftValor_compra)
                             .addComponent(jftValor_locacao, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpCadastroMidiasLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCadastroMidiasLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jbtnUpdate)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnSave)))
                 .addContainerGap())
         );
@@ -397,9 +390,7 @@ public class JFrmMidia extends javax.swing.JFrame {
                         .addGap(299, 299, 299))
                     .addGroup(jpCadastroMidiasLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(jpCadastroMidiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbtnUpdate)
-                            .addComponent(jbtnSave))
+                        .addComponent(jbtnSave)
                         .addContainerGap())))
         );
 
@@ -452,126 +443,75 @@ public class JFrmMidia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        MidiaBean midia = new MidiaBean();
-        try{
-            while(jtbMidia.getSelectedRow() >=0){
-                if(jtbMidia.getSelectedRow() >=0){
-                    JOptionPane.showMessageDialog(null, "Este registro já existe");
-                    clear();
-                    jtxtId.requestFocus();
-                }
-                else
-                    midia.setId(Integer.valueOf(jtxtId.getText()));
-                    StringTokenizer fornecedor_st = new StringTokenizer(jcbxFornecedor.getSelectedItem().toString(), " - ");
-                    StringTokenizer autor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
-                    StringTokenizer diretor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
-                    int fornecedor_id = Integer.valueOf(fornecedor_st.nextToken());
-                    int autor_id = Integer.valueOf(autor_st.nextToken());
-                    int diretor_id = Integer.valueOf(diretor_st.nextToken());
-                    midia.setFornecedor(Read.searchRegisterFornecedor(fornecedor_id));
-                    midia.setAutor(Read.searchAutor(autor_id));
-                    midia.setDiretor(Read.searchDiretor(diretor_id));
-                    midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
-                    midia.setGenero(jcbxGenero.getSelectedItem().toString());
-                    midia.setCensura(jcbxCensura.getSelectedItem().toString());
-                    midia.setTitulo(jtxtTitulo.getText());
-                    midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
-                    midia.setData_lancamento(jftData_lancamento.getText());
-                    midia.setSinopse(jtxtSinopse.getText());
-                    midia.setValor_custo(jftValor_compra.getText());
-                    midia.setValor_locacao(jftValor_locacao.getText());
-                    midia.setQuantidade(Integer.parseInt(jsQuantidade.getValue().toString()));
-                    Object campo[] = {
-                        midia.getId(),
-                        midia.getTitulo(),
-                        midia.getValor_custo(),
-                        midia.getValor_locacao(),
-                        midia.getQuantidade()};
-                    model.addRow(campo);
-                    list_midia.add(midia);
-                    Save.createFileMidia(list_midia);
-                    JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-            }
-        }catch(Exception ex){
-            ex.getMessage();
-        }
-        clear();
-        jtxtId.requestFocus();
-    }//GEN-LAST:event_jbtnSaveActionPerformed
-
-    private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
+        MidiaBean midia = (is_update ? list_midia.get(selected_index) : new MidiaBean());
+        String msg = (is_update ? "Registro Alterado com sucesso!" : "Salvo com sucesso");
+      
         StringTokenizer fornecedor_st = new StringTokenizer(jcbxFornecedor.getSelectedItem().toString(), " - ");
         StringTokenizer autor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
         StringTokenizer diretor_st = new StringTokenizer(jcbxAutor.getSelectedItem().toString(), " - ");
         int fornecedor_id = Integer.valueOf(fornecedor_st.nextToken());
         int autor_id = Integer.valueOf(autor_st.nextToken());
         int diretor_id = Integer.valueOf(diretor_st.nextToken());
-        int id = Integer.valueOf(jtxtId.getText());
         
-        for (MidiaBean midia : list_midia) {
-            if(midia.getId() == id){
-                midia.setFornecedor(Read.searchRegisterFornecedor(fornecedor_id));
-                midia.setAutor(Read.searchAutor(autor_id));
-                midia.setDiretor(Read.searchDiretor(diretor_id));
-                midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
-                midia.setGenero(jcbxGenero.getSelectedItem().toString());
-                midia.setCensura(jcbxCensura.getSelectedItem().toString());
-                midia.setTitulo(jtxtTitulo.getText());
-                midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
-                midia.setData_lancamento(jftData_lancamento.getText());
-                midia.setSinopse(jtxtSinopse.getText());
-                midia.setValor_custo(jftValor_compra.getText());
-                midia.setValor_locacao(jftValor_locacao.getText());
-                midia.setQuantidade(Integer.parseInt(jsQuantidade.getValue().toString()));
-                Save.createFileMidia(list_midia);
-                JOptionPane.showMessageDialog(this, "Registro Alterado com sucesso!");
-                
-                Object campo[] = {
-                    midia.getId(),
-                    midia.getTitulo(),
-                    midia.getValor_custo(),
-                    midia.getValor_locacao(),
-                    midia.getQuantidade()};
-                model.insertRow(jtbMidia.getSelectedRow(), campo);
-                model.removeRow(jtbMidia.getSelectedRow()+1);
-                clear();
-                jTPanel.setSelectedComponent(jPanel1);
-                jTPanel.setEnabledAt(1, false);
-                jbtnUpdate.setEnabled(false);
-            }
+        midia.setId(Integer.valueOf(jtxtId.getText()));
+        midia.setFornecedor(Read.searchRegisterFornecedor(fornecedor_id));
+        midia.setAutor(Read.searchAutor(autor_id));
+        midia.setDiretor(Read.searchDiretor(diretor_id));
+        midia.setGrupo(jcbxGrupo.getSelectedItem().toString());
+        midia.setGenero(jcbxGenero.getSelectedItem().toString());
+        midia.setCensura(jcbxCensura.getSelectedItem().toString());
+        midia.setTitulo(jtxtTitulo.getText());
+        midia.setCategoria(jcbxCategoria.getSelectedItem().toString());
+        midia.setData_lancamento(jftData_lancamento.getText());
+        midia.setSinopse(jtxtSinopse.getText());
+        midia.setValor_custo(jftValor_compra.getText());
+        midia.setValor_locacao(jftValor_locacao.getText());
+        midia.setQuantidade(Integer.parseInt(jsQuantidade.getValue().toString()));
+
+        if(is_update)
+            list_midia.set(selected_index, midia);
+        else
+            list_midia.add(midia);
+        try {
+            Save.createFileMidia(list_midia);
+            jTPanel.setSelectedComponent(jpListagemMidias);
+            jTPanel.setEnabledAt(1, false);
+            load_table();
+            clear();
+
+            JOptionPane.showMessageDialog(this, msg); 
+        }catch(Exception ex){
+            ex.getMessage();
         }
-        
-    }//GEN-LAST:event_jbtnUpdateActionPerformed
+    }//GEN-LAST:event_jbtnSaveActionPerformed
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
-        int id = Integer.valueOf(jtxtId.getText());
-        for(int i=0; i < list_midia.size(); i++){
-            if(jtbMidia.isRowSelected(i)){
-                model.removeRow(i);
-                Delete.removeRegistroMidia(jtxtId.getText());
-                JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+        selected_index = jtbMidia.getSelectedRow();
+        if (selected_index != -1) {
+            if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                try {
+                    list_midia.remove(selected_index);
+                    Save.createFileMidia(list_midia);
+                    JOptionPane.showMessageDialog(this, "Removido com sucesso!");
+                    load_table();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Erro ao deletar");
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente!");
         }
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        jtbMidia.setModel(model);
+        jTPanel.setEnabledAt(1, false);
+        load_table();
         
-        this.list_midia = Read.readerFileMidia();
         this.list_fornecedor = Read.readerFileFornecedor();
         this.list_autor = Read.readerFileAutor();
         this.list_diretor = Read.readerFileDiretor();
-
-        for(MidiaBean midia: list_midia){
-            Object campo[] = {
-                midia.getId(), 
-                midia.getTitulo(),
-                midia.getValor_custo(), 
-                midia.getValor_locacao(), 
-                midia.getQuantidade()};
-            model.addRow(campo);
-        }
-
+        
         for(int i=0; i < list_diretor.size(); i++){
             DiretorBean diretor = list_diretor.get(i);
             jcbxDiretor.addItem(diretor.getId()+ " - "+
@@ -593,28 +533,6 @@ public class JFrmMidia extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jtbMidiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMidiaMouseClicked
-        clear();
-        for(int i=0; i < list_midia.size(); i++){
-            
-            if(jtbMidia.getValueAt(i, 0).equals(list_midia.get(i).getId())){
-                if(jtbMidia.isRowSelected(i)){
-                    jtxtId.setText(String.valueOf(jtbMidia.getValueAt(i, 0)));
-                    jcbxFornecedor.setSelectedItem(list_midia.get(i).getFornecedor());
-                    jcbxGrupo.setSelectedItem(list_midia.get(i).getGrupo());
-                    jcbxGenero.setSelectedItem(list_midia.get(i).getGenero());
-                    jcbxCensura.setSelectedItem(list_midia.get(i).getCensura());
-                    jtxtTitulo.setText(list_midia.get(i).getTitulo());
-                    jcbxAutor.setSelectedItem(list_midia.get(i).getAutor());
-                    jcbxDiretor.setSelectedItem(list_midia.get(i).getDiretor());
-                    jcbxCategoria.setSelectedItem(list_midia.get(i).getCategoria());
-                    jftData_lancamento.setText(list_midia.get(i).getData_lancamento());
-                    jtxtSinopse.setText(list_midia.get(i).getSinopse());
-                    jftValor_compra.setText(list_midia.get(i).getValor_custo());
-                    jftValor_locacao.setText(list_midia.get(i).getValor_locacao());
-                    jsQuantidade.setValue(list_midia.get(i).getQuantidade());
-                }
-            }
-        }
     }//GEN-LAST:event_jtbMidiaMouseClicked
 
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
@@ -628,35 +546,53 @@ public class JFrmMidia extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
-        if(jtbMidia.getSelectedRow() >= 0){
+        selected_index = jtbMidia.getSelectedRow();
+        
+        if (selected_index != -1) {
+            MidiaBean midia = list_midia.get(selected_index);
+            
+            jtxtId.setText(String.valueOf(midia.getId()));
+            jcbxFornecedor.setSelectedItem(midia.getFornecedor());
+            jcbxGrupo.setSelectedItem(midia.getGrupo());
+            jcbxGenero.setSelectedItem(midia.getGenero());
+            jcbxCensura.setSelectedItem(midia.getCensura());
+            jtxtTitulo.setText(midia.getTitulo());
+            jcbxAutor.setSelectedItem(midia.getAutor());
+            jcbxDiretor.setSelectedItem(midia.getDiretor());
+            jcbxCategoria.setSelectedItem(midia.getCategoria());
+            jftData_lancamento.setText(midia.getData_lancamento());
+            jtxtSinopse.setText(midia.getSinopse());
+            jftValor_compra.setText(midia.getValor_custo());
+            jftValor_locacao.setText(midia.getValor_locacao());
+            jsQuantidade.setValue(midia.getQuantidade());
+            
             jTPanel.setEnabledAt(1, true);
-            jTPanel.setSelectedComponent(jPanel2);
-            jbtnUpdate.setEnabled(true);
-            jbtnSave.setEnabled(false);
-        }
-        else
-         JOptionPane.showMessageDialog(null, "Selecione um cliente");   
+            jTPanel.setSelectedComponent(jpCadastroMidias);
+            jbtnSave.setEnabled(true);
+            is_update = true;
+        }else
+         JOptionPane.showMessageDialog(null, "Selecione um cliente"); 
     }//GEN-LAST:event_jbtnEditActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNewActionPerformed
         jTPanel.setEnabledAt(1, true);
-        jTPanel.setSelectedComponent(jPanel2);
-        jbtnUpdate.setEnabled(false);
-        jbtnSave.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        jTPanel.setSelectedComponent(jpCadastroMidias);
+        jbtnSave.setEnabled(true);      
+    }//GEN-LAST:event_jbtnNewActionPerformed
 
     private void clear(){
         jtxtId.setText(null);
         jtxtTitulo.setText(null);
-    
         jftData_lancamento.setText(null);
         jftValor_compra.setText(null);
         jftValor_locacao.setText(null);
         jtxtSinopse.setText(null);
+        jsQuantidade.setValue(0);
+        is_update = false;
+        selected_index = -1;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -680,8 +616,8 @@ public class JFrmMidia extends javax.swing.JFrame {
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnEdit;
     private javax.swing.JButton jbtnExit;
+    private javax.swing.JButton jbtnNew;
     private javax.swing.JButton jbtnSave;
-    private javax.swing.JButton jbtnUpdate;
     private javax.swing.JComboBox jcbxAutor;
     private javax.swing.JComboBox jcbxCategoria;
     private javax.swing.JComboBox jcbxCensura;
@@ -700,4 +636,22 @@ public class JFrmMidia extends javax.swing.JFrame {
     private javax.swing.JTextArea jtxtSinopse;
     private javax.swing.JTextField jtxtTitulo;
     // End of variables declaration//GEN-END:variables
+
+
+    public void load_table(){
+        Object titulo[] = {"Código", "Título", "Valor Compra", "Valor Locação", "Quantidade"};
+        Object grade[][] = null;
+        model = new DefaultTableModel(grade, titulo);
+        jtbMidia.setModel(model);
+        this.list_midia = Read.readerFileMidia();
+        for(MidiaBean midia: list_midia){
+            Object campo[] = {
+                midia.getId(), 
+                midia.getTitulo(),
+                midia.getValor_custo(), 
+                midia.getValor_locacao(), 
+                midia.getQuantidade()};
+            model.addRow(campo);
+        }
+    }
 }

@@ -309,8 +309,8 @@ public class JFrmAutor extends javax.swing.JFrame {
         jtbLista.setModel(model);
         this.lista_autores = Read.readerFileAutor();
 
-        for(AutorBean _autores: lista_autores){
-            Object campos[] = {_autores.getId(), _autores.getNome()};
+        for(AutorBean autor: lista_autores){
+            Object campos[] = {String.format("%05d", autor.getId()), autor.getNome()};
             model.addRow(campos);
         }
     }

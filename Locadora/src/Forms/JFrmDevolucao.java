@@ -2,18 +2,20 @@ package Forms;
 
 import Controlers.*;
 import Model.*;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class JFrmDevolucao extends javax.swing.JFrame {
     ArrayList<LocacaoBean> list_locacao;
-    
-    Object titulo[] = {"Título","Total","Valor", "Data Locação"};
-    Object grade[][] = null;
-    DefaultTableModel model = new DefaultTableModel(grade, titulo);
+
+    private static final String EMPTY_OPTION = "---------";
+    DefaultTableModel model;
+
     public JFrmDevolucao() {
         initComponents();
         setLocationRelativeTo(null);
@@ -40,8 +42,6 @@ public class JFrmDevolucao extends javax.swing.JFrame {
         jtxtTotal = new javax.swing.JTextField();
         jtxtPago = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jtxtTroco = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jbtnExit = new javax.swing.JButton();
         jbtnSave = new javax.swing.JButton();
@@ -83,7 +83,6 @@ public class JFrmDevolucao extends javax.swing.JFrame {
         jftxtData_devolucao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jftxtData_devolucao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jcbxLocacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-----" }));
         jcbxLocacao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbxLocacao.setEnabled(false);
         jcbxLocacao.setName(""); // NOI18N
@@ -157,44 +156,29 @@ public class JFrmDevolucao extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("PAGO:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("TROCO:");
-
-        jtxtTroco.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtxtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(55, 55, 55)
-                .addComponent(jLabel6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtxtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtxtPago)
+                    .addComponent(jtxtTotal))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jtxtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jtxtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jtxtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -246,10 +230,8 @@ public class JFrmDevolucao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -263,74 +245,118 @@ public class JFrmDevolucao extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSearchActionPerformed
+
+        jcbxLocacao.removeAllItems();
         
         String id = jtxtId.getText();
         ClienteBean cliente = Read.searchCliente(Integer.valueOf(jtxtId.getText()));
-
         ArrayList<LocacaoBean> locacoes = Read.readerFileLocacao();
+        jcbxLocacao.addItem(EMPTY_OPTION);
         for(LocacaoBean locacao: locacoes){
             if(locacao.getCliente().getId() == cliente.getId() && locacao.getSituacao() == LocacaoBean.SITUACAO_ABERTO){
                 jcbxLocacao.addItem(locacao.getId()+" - "+locacao.getData_locacao());
             }
-        ArrayList list_midias = Read.searchLocacaoMidias(locacao.getId());
-            if(locacao.getSituacao() == 1){
-                for (int i = 0; i < list_midias.size(); i++) {
-                    String titulo = locacao.getMidias().get(i).getTitulo();
-                    String total = locacao.getMidias().get(i).getValor_locacao();
-                    Double t = Double.valueOf(total);
-                    t +=t;
-                    String tipo = locacao.getMidias().get(i).getGrupo();
-                    Object campo[]  = {titulo , total, locacao.getData_locacao(), tipo};
-                    model.addRow(campo);
-                    jtxtTotal.setText(String.valueOf(t));
-                    }
-                }
-            }  
+        }  
         jcbxLocacao.setEnabled(true);
-        
     }//GEN-LAST:event_jbtnSearchActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jftxtData_devolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis()))); 
         jftxtData_devolucao.setEditable(false);
+        
+        Object titulo[] = {"Título","Total","Valor", "Data Locação"};
+        Object grade[][] = null;
+        
+        model = new DefaultTableModel(grade, titulo);
         jtbDevolucao.setModel(model);
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void jcbxLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbxLocacaoActionPerformed
+        
+        Object titulo[] = {"Título","Total","Valor", "Data Locação"};
+        Object grade[][] = null;
+        
+        model = new DefaultTableModel(grade, titulo);
+        jtbDevolucao.setModel(model);
+        
+        String value = (String)jcbxLocacao.getSelectedItem();
+        
+        Double total = new Double(0);
+        
+        if (!value.equals(EMPTY_OPTION)) {            
+            StringTokenizer st = new StringTokenizer(value, " - ");
+            int locacao_id = Integer.valueOf(st.nextToken());
+            
+            LocacaoBean locacao = Read.searchLocacao(locacao_id);
+            for (MidiaBean midia : locacao.getMidias()) {
+                
+                total += Double.valueOf(midia.getValor_locacao());
+                
+                Object campo[]  = {
+                    midia.getTitulo(),
+                    midia.getValor_locacao(), 
+                    locacao.getData_locacao(),
+                    midia.getGrupo()
+                };
 
+                model.addRow(campo);
+            }
+            
+            jtxtTotal.setText(String.valueOf(total));
+        }
     }//GEN-LAST:event_jcbxLocacaoActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-       try{
-           LocacaoBean locacao = new LocacaoBean();
-           if(locacao.getSituacao() == 1){
-                int id = locacao.getId();
-                int id_cliente = Integer.valueOf(jtxtId.getText());
-                String valor = jtxtPago.getText();
-                String data_locacao = locacao.getData_locacao();
-                String data_devolucao = jftxtData_devolucao.getText().toString();
-                locacao.setValor_pago(valor);
-                locacao.setData_locacao(data_locacao);
-                locacao.setData_devolucao(data_devolucao);
-                locacao.setSituacao(LocacaoBean.SITUACAO_DEVOLVIDO);
-                for (int i = 0; i < list_locacao.size(); i++) {
-                    list_locacao.add(locacao);
-                    Update.updateLocacao(locacao);
-                    ArrayList list = list_locacao;
-                    list_locacao.remove(i);
-                } 
-           }
-           System.out.println("SALVO");
-        }
-        catch(NullPointerException ex){
-            System.out.println(ex.getMessage() + "ERRRO");
+        String value = (String)jcbxLocacao.getSelectedItem();
+        if (!value.equals(EMPTY_OPTION)) {
+            StringTokenizer st = new StringTokenizer(value, " - ");
+            int locacao_id = Integer.valueOf(st.nextToken());
+
+            LocacaoBean locacao = Read.searchLocacao(locacao_id);
+            ArrayList<LocacaoBean> locacoes = Read.readerFileLocacao();
+            
+            
+            int index = 0;
+            for (LocacaoBean loc : locacoes) {
+                if (loc.getId() == locacao_id)
+                    break;
+                index++; 
+            }
+            
+            locacao.setValor_pago(jtxtPago.getText());
+            locacao.setData_devolucao(jftxtData_devolucao.getText());
+            locacao.setSituacao(LocacaoBean.SITUACAO_DEVOLVIDO);
+            
+            locacoes.set(index, locacao);
+            try {
+                Save.createFileLocacao(locacoes);
+                
+                jtxtPago.setText(null);
+                jtxtTotal.setText(null);
+                jcbxLocacao.removeAllItems();
+                jcbxLocacao.setEnabled(false);
+                jtxtId.setText(null);
+                jtxtId.requestFocus();
+
+                Object titulo[] = {"Título","Total","Valor", "Data Locação"};
+                Object grade[][] = null;
+
+                model = new DefaultTableModel(grade, titulo);
+                jtbDevolucao.setModel(model);
+                
+                JOptionPane.showMessageDialog(this, "Efetuada Devolução");
+                
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
@@ -348,7 +374,6 @@ public class JFrmDevolucao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -363,6 +388,5 @@ public class JFrmDevolucao extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtPago;
     private javax.swing.JTextField jtxtTotal;
-    private javax.swing.JTextField jtxtTroco;
     // End of variables declaration//GEN-END:variables
 }

@@ -93,11 +93,6 @@ public class JFrmFornecedor extends javax.swing.JFrame {
                 "Código", "Cnpj", "Razão Social", "Contato", "Situação"
             }
         ));
-        jtbFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbFornecedorMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtbFornecedor);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Icons/delete-26.png"))); // NOI18N
@@ -533,9 +528,6 @@ public class JFrmFornecedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jtbFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbFornecedorMouseClicked
-    }//GEN-LAST:event_jtbFornecedorMouseClicked
-
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnExitActionPerformed
@@ -577,7 +569,7 @@ public class JFrmFornecedor extends javax.swing.JFrame {
             jTPanel.setEnabledAt(1, true);
             jTPanel.setSelectedComponent(jPanel2);
             jbtnSave.setEnabled(true);
-            is_update = true;   
+            is_update = true;
         }else
          JOptionPane.showMessageDialog(null, "Selecione um cliente");   
     }//GEN-LAST:event_jbtnEditActionPerformed
